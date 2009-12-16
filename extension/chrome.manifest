@@ -1,0 +1,6 @@
+content tripdub chrome/content/
+
+locale tripdub en-US chrome/locale/en-US/
+
+# Firefox
+overlay	chrome://browser/content/browser.xul chrome://tripdub/content/tripdub.xul

@@ -1,0 +1,629 @@
+<!doctype html public "-//W3C//DTD HTML 4.0 Frameset//EN""http://www.w3.org/TR/REC-html40/frameset.dtd">
+<html>
+<head>
+<title>
+TripDub Overview
+</title>
+<link rel ="stylesheet" type="text/css" href="stylesheet.css" title="Style">
+<script>
+function asd() {
+	
+		parent.document.title="App.js Overview";
+	
+}
+</script>
+</head>
+<body bgcolor="white" onload="asd();">
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> 	<font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top">
+<em>
+<b>TripDub</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<center>
+	
+	   <h2>App.js</h2>
+	
+</center>
+
+	
+
+
+<h4>Summary</h4>
+<p>
+	
+		Contains the App class, which provides utility functions and app/session state
+ <BR/><BR/><B>Version: </B>0.8.0<BR/><BR/><B>Author:</B> ChrisWinberry
+ <BR/>
+	
+</p>
+
+<hr>
+
+
+    <table border="1" cellpadding="3" cellspacing="0" width="100%">
+    <tr bgcolor="#CCCCFF" class="TableHeadingColor">
+    <td colspan=2><font size="+2">
+    
+        <b>Class Summary</b>
+    
+    </font></td>
+    </tr>
+    
+    <tr bgcolor="white" class="TableRowColor">
+    <td width="15%"><b><a href="App.html">App</a></b></td>
+    <td>Provides misc.</td>
+    </tr>
+    
+    </table>
+    <hr/> 
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<!-- ========== END METHOD SUMMARY =========== -->
+
+
+        <pre class="sourceview"><span class="comment">/**
+ * <span class="attrib">@fileoverview</span> Contains the App class, which provides utility functions and app/session state
+ * <span class="attrib">@author</span> ChrisWinberry
+ * <span class="attrib">@version</span> 0.8.0
+ */</span>
+
+<span class="comment">/**
+ * Creates a new App
+ * <span class="attrib">@constructor</span>
+ * <span class="attrib">@class</span> Provides misc. utility functions and access to application/session state
+ * <span class="attrib">@param</span> {VirtualPath} virtualPath VirtualPath that represents the root folder for the application's files
+ * <span class="attrib">@requires</span> VirtualPath
+ * <span class="attrib">@requires</span> DbConnection
+ */</span>
+<span class="reserved">function</span> App (virtualPath) {
+	<span class="comment">/** <span class="attrib">@ignore</span> */</span>
+	<span class="reserved">this</span>._VirtualPath = virtualPath;
+	<span class="comment">/** <span class="attrib">@ignore</span> */</span>
+	<span class="comment">//https://developer.mozilla.org/En/Code_snippets/Miscellaneous</span>
+	<span class="reserved">this</span>._OSCPU = Components.classes[<span class="literal">"@mozilla.org/network/protocol;1?name=http"</span>]
+		.getService(Components.interfaces.nsIHttpProtocolHandler).oscpu;
+}
+
+<span class="comment">/**
+ * Logs data to the console
+ * <span class="attrib">@param</span> {Object} data Data to be logged to the console
+ */</span>
+App.<span class="reserved">prototype</span>.Log = <span class="reserved">function</span> App__Log (data) { <span class="reserved">if</span> (typeof Log == <span class="literal">"function"</span>) { Log(data); } };
+
+<span class="comment">/** <span class="attrib">@ignore</span> */</span>
+App._rng = Components.classes[<span class="literal">'@mozilla.org/security/random-generator;1'</span>]
+	.getService(Components.interfaces.nsIRandomGenerator);
+
+<span class="comment">/**
+ * Gets the virtualpath root for this app
+ * <span class="attrib">@type</span> VirtualPath
+ */</span>
+App.<span class="reserved">prototype</span>.GetVirtualPath = <span class="reserved">function</span> App__GetVirtualPath () { <span class="reserved">return</span>(<span class="reserved">this</span>._VirtualPath); }
+<span class="comment">/**
+ * The virtualpath root for this app
+ * <span class="attrib">@type</span> VirtualPath
+ */</span>
+App.<span class="reserved">prototype</span>.__defineGetter__(<span class="literal">"VirtualPath"</span>, App.<span class="reserved">prototype</span>.GetVirtualPath);
+
+<span class="comment">/**
+ * Get the full mapped path to a resource based on the current app's root
+ * <span class="attrib">@param</span> {Request} request Request object (used for calculating relative paths)
+ * <span class="attrib">@param</span> {String} path the absolute or relative path to map
+ * <span class="attrib">@type</span> VirtualPath
+ */</span>
+App.<span class="reserved">prototype</span>.MapPath = <span class="reserved">function</span> App__MapPath (request, path) {
+	var vp = new <span class="reserved">this</span>._VirtualPath(request.GetPath());
+	<span class="reserved">if</span> (vp.IsFile)
+		vp = vp.Parent;
+	vp.AppendPath(path);
+	<span class="reserved">return</span>(vp);
+}
+
+<span class="comment">/**
+ * Gets the OSCPU identifier the app is currently running under
+ * <span class="attrib">@type</span> String
+ */</span>
+App.<span class="reserved">prototype</span>.GetOSCPU = <span class="reserved">function</span> App__GetOSCPU () { <span class="reserved">return</span>(<span class="reserved">this</span>._OSCPU); }
+<span class="comment">/**
+ * The OSCPU identifier the app is currently running under
+ * <span class="attrib">@type</span> String
+ */</span>
+App.<span class="reserved">prototype</span>.__defineGetter__(<span class="literal">"OSCPU"</span>, App.<span class="reserved">prototype</span>.GetOSCPU);
+
+<span class="comment">/**
+ * Generates a random number of "length" bytes long
+ * <span class="attrib">@param</span> String
+ */</span>
+App.<span class="reserved">prototype</span>.Rng = <span class="reserved">function</span> App__Rng (length) {
+	<span class="comment">//https://developer.mozilla.org/En/Code_snippets/Miscellaneous</span>
+	var buffer = <span class="literal">''</span>;
+	<span class="reserved">return</span>(App._rng.generateRandomBytes(length, buffer));
+}
+
+<span class="comment">/**
+ * Determines the appropriate mime type for a given path and file extension
+ * <span class="attrib">@param</span> {String} path The path to inspect
+ * <span class="attrib">@type</span> String
+ */</span>
+App.<span class="reserved">prototype</span>.DetermineContentType = <span class="reserved">function</span> App__DetermineContentType (path) {
+	<span class="reserved">if</span> (path == null || path.toString().indexOf(<span class="literal">'.'</span>) &lt; 0)
+		<span class="reserved">return</span>(<span class="literal">""</span>);
+
+	switch (path.split(<span class="literal">"."</span>).pop().toLowerCase()) {
+		case <span class="literal">"htm"</span> :
+		case <span class="literal">"html"</span> :
+		case <span class="literal">"jss"</span> :
+			<span class="reserved">return</span>(<span class="literal">"text/html"</span>);
+			break;
+	
+		case <span class="literal">"css"</span> :
+			<span class="reserved">return</span>(<span class="literal">"text/css"</span>);
+			break;
+	
+		case <span class="literal">"js"</span> :
+			<span class="reserved">return</span>(<span class="literal">"application/x-javascript"</span>);
+			break;
+	
+		case <span class="literal">"jpg"</span> :
+		case <span class="literal">"jpe"</span> :
+		case <span class="literal">"jpeg"</span> :
+			<span class="reserved">return</span>(<span class="literal">"image/jpeg"</span>);
+			break;
+	
+		case <span class="literal">"gif"</span> :
+			<span class="reserved">return</span>(<span class="literal">"image/gif"</span>);
+			break;
+	
+		case <span class="literal">"png"</span> :
+			<span class="reserved">return</span>(<span class="literal">"image/png"</span>);
+			break;
+	
+		case <span class="literal">"ico"</span> :
+			<span class="reserved">return</span>(<span class="literal">"image/x-icon"</span>);
+			break;
+	
+		case <span class="literal">"gz"</span> :
+		case <span class="literal">"gzip"</span> :
+			<span class="reserved">return</span>(<span class="literal">"application/x-gzip"</span>);
+			break;
+	
+		case <span class="literal">"zip"</span> :
+			<span class="reserved">return</span>(<span class="literal">"application/zip"</span>);
+			break;
+	
+		case <span class="literal">"log"</span> :
+		case <span class="literal">"txt"</span> :
+			<span class="reserved">return</span>(<span class="literal">"text/plain"</span>);
+			break;
+	
+		case <span class="literal">"pdf"</span> :
+			<span class="reserved">return</span>(<span class="literal">"application/pdf"</span>);
+			break;
+	
+		case <span class="literal">"swf"</span> :
+			<span class="reserved">return</span>(<span class="literal">"application/x-shockwave-flash"</span>);
+			break;
+	
+		case <span class="literal">"xml"</span> :
+		case <span class="literal">"xsl"</span> :
+			<span class="reserved">return</span>(<span class="literal">"text/xml"</span>);
+			break;
+			
+		default :
+			<span class="reserved">return</span>(<span class="literal">"application/octet-stream"</span>);
+			break;
+
+	}
+}
+<span class="comment">/*
+".3gp"   : "video/3gpp",
+".a"     : "application/octet-stream",
+".ai"    : "application/postscript",
+".aif"   : "audio/x-aiff",
+".aiff"  : "audio/x-aiff",
+".asc"   : "application/pgp-signature",
+".asf"   : "video/x-ms-asf",
+".asm"   : "text/x-asm",
+".asx"   : "video/x-ms-asf",
+".atom"  : "application/atom+xml",
+".au"    : "audio/basic",
+".avi"   : "video/x-msvideo",
+".bat"   : "application/x-msdownload",
+".bin"   : "application/octet-stream",
+".bmp"   : "image/bmp",
+".bz2"   : "application/x-bzip2",
+".c"     : "text/x-c",
+".cab"   : "application/vnd.ms-cab-compressed",
+".cc"    : "text/x-c",
+".chm"   : "application/vnd.ms-htmlhelp",
+".class"   : "application/octet-stream",
+".com"   : "application/x-msdownload",
+".conf"  : "text/plain",
+".cpp"   : "text/x-c",
+".crt"   : "application/x-x509-ca-cert",
+".css"   : "text/css",
+".csv"   : "text/csv",
+".cxx"   : "text/x-c",
+".deb"   : "application/x-debian-package",
+".der"   : "application/x-x509-ca-cert",
+".diff"  : "text/x-diff",
+".djv"   : "image/vnd.djvu",
+".djvu"  : "image/vnd.djvu",
+".dll"   : "application/x-msdownload",
+".dmg"   : "application/octet-stream",
+".doc"   : "application/msword",
+".dot"   : "application/msword",
+".dtd"   : "application/xml-dtd",
+".dvi"   : "application/x-dvi",
+".ear"   : "application/java-archive",
+".eml"   : "message/rfc822",
+".eps"   : "application/postscript",
+".exe"   : "application/x-msdownload",
+".f"     : "text/x-fortran",
+".f77"   : "text/x-fortran",
+".f90"   : "text/x-fortran",
+".flv"   : "video/x-flv",
+".for"   : "text/x-fortran",
+".gem"   : "application/octet-stream",
+".gemspec" : "text/x-script.ruby",
+".gif"   : "image/gif",
+".gz"    : "application/x-gzip",
+".h"     : "text/x-c",
+".hh"    : "text/x-c",
+".htm"   : "text/html",
+".html"  : "text/html",
+".ico"   : "image/vnd.microsoft.icon",
+".ics"   : "text/calendar",
+".ifb"   : "text/calendar",
+".iso"   : "application/octet-stream",
+".jar"   : "application/java-archive",
+".java"  : "text/x-java-source",
+".jnlp"  : "application/x-java-jnlp-file",
+".jpeg"  : "image/jpeg",
+".jpg"   : "image/jpeg",
+".js"    : "application/javascript",
+".json"  : "application/json",
+".log"   : "text/plain",
+".m3u"   : "audio/x-mpegurl",
+".m4v"   : "video/mp4",
+".man"   : "text/troff",
+".mathml"  : "application/mathml+xml",
+".mbox"  : "application/mbox",
+".mdoc"  : "text/troff",
+".me"    : "text/troff",
+".mid"   : "audio/midi",
+".midi"  : "audio/midi",
+".mime"  : "message/rfc822",
+".mml"   : "application/mathml+xml",
+".mng"   : "video/x-mng",
+".mov"   : "video/quicktime",
+".mp3"   : "audio/mpeg",
+".mp4"   : "video/mp4",
+".mp4v"  : "video/mp4",
+".mpeg"  : "video/mpeg",
+".mpg"   : "video/mpeg",
+".ms"    : "text/troff",
+".msi"   : "application/x-msdownload",
+".odp"   : "application/vnd.oasis.opendocument.presentation",
+".ods"   : "application/vnd.oasis.opendocument.spreadsheet",
+".odt"   : "application/vnd.oasis.opendocument.text",
+".ogg"   : "application/ogg",
+".p"     : "text/x-pascal",
+".pas"   : "text/x-pascal",
+".pbm"   : "image/x-portable-bitmap",
+".pdf"   : "application/pdf",
+".pem"   : "application/x-x509-ca-cert",
+".pgm"   : "image/x-portable-graymap",
+".pgp"   : "application/pgp-encrypted",
+".pkg"   : "application/octet-stream",
+".pl"    : "text/x-script.perl",
+".pm"    : "text/x-script.perl-module",
+".png"   : "image/png",
+".pnm"   : "image/x-portable-anymap",
+".ppm"   : "image/x-portable-pixmap",
+".pps"   : "application/vnd.ms-powerpoint",
+".ppt"   : "application/vnd.ms-powerpoint",
+".ps"    : "application/postscript",
+".psd"   : "image/vnd.adobe.photoshop",
+".py"    : "text/x-script.python",
+".qt"    : "video/quicktime",
+".ra"    : "audio/x-pn-realaudio",
+".rake"  : "text/x-script.ruby",
+".ram"   : "audio/x-pn-realaudio",
+".rar"   : "application/x-rar-compressed",
+".rb"    : "text/x-script.ruby",
+".rdf"   : "application/rdf+xml",
+".roff"  : "text/troff",
+".rpm"   : "application/x-redhat-package-manager",
+".rss"   : "application/rss+xml",
+".rtf"   : "application/rtf",
+".ru"    : "text/x-script.ruby",
+".s"     : "text/x-asm",
+".sgm"   : "text/sgml",
+".sgml"  : "text/sgml",
+".sh"    : "application/x-sh",
+".sig"   : "application/pgp-signature",
+".snd"   : "audio/basic",
+".so"    : "application/octet-stream",
+".svg"   : "image/svg+xml",
+".svgz"  : "image/svg+xml",
+".swf"   : "application/x-shockwave-flash",
+".t"     : "text/troff",
+".tar"   : "application/x-tar",
+".tbz"   : "application/x-bzip-compressed-tar",
+".tci"   : "application/x-topcloud",
+".tcl"   : "application/x-tcl",
+".tex"   : "application/x-tex",
+".texi"  : "application/x-texinfo",
+".texinfo" : "application/x-texinfo",
+".text"  : "text/plain",
+".tif"   : "image/tiff",
+".tiff"  : "image/tiff",
+".torrent" : "application/x-bittorrent",
+".tr"    : "text/troff",
+".txt"   : "text/plain",
+".vcf"   : "text/x-vcard",
+".vcs"   : "text/x-vcalendar",
+".vrml"  : "model/vrml",
+".war"   : "application/java-archive",
+".wav"   : "audio/x-wav",
+".wma"   : "audio/x-ms-wma",
+".wmv"   : "video/x-ms-wmv",
+".wmx"   : "video/x-ms-wmx",
+".wrl"   : "model/vrml",
+".wsdl"  : "application/wsdl+xml",
+".xbm"   : "image/x-xbitmap",
+".xhtml"   : "application/xhtml+xml",
+".xls"   : "application/vnd.ms-excel",
+".xml"   : "application/xml",
+".xpm"   : "image/x-xpixmap",
+".xsl"   : "application/xml",
+".xslt"  : "application/xslt+xml",
+".yaml"  : "text/yaml",
+".yml"   : "text/yaml",
+".zip"   : "application/zip"
+*/</span>
+
+<span class="comment">/**
+ * Creates the appropriate Content-type header in a Response instance based on the file requested in a Request instance
+ * <span class="attrib">@param</span> {Request} Request Request instance to map from
+ * <span class="attrib">@param</span> {Response} Response Response instance to write the Content-type header to
+ */</span>
+App.<span class="reserved">prototype</span>.MapContentType = <span class="reserved">function</span> App__MapContentType (Request, Response) {
+	Response.ContentType = <span class="reserved">this</span>.DetermineContentType(Request.CurrentPath);
+}
+
+<span class="comment">/**
+ * Opens a database connection
+ * <span class="attrib">@param</span> {String} name Name of the database to open (connection string)
+ * <span class="attrib">@type</span> DbConnection
+ */</span>
+App.<span class="reserved">prototype</span>.OpenDatabase = <span class="reserved">function</span> App__OpenDatabase (name) {
+	<span class="reserved">return</span>(new DbConnection(name));
+}
+
+<span class="comment">/**
+ * Lists all currently created databases. Names in this list can be used by {<span class="attrib">@link</span> #OpenDatabase} to open the database
+ * <span class="attrib">@type</span> String[] 
+ */</span>
+App.<span class="reserved">prototype</span>.ListDatabases = <span class="reserved">function</span> App__ListDatabases () {
+	<span class="reserved">return</span>(DbConnection.GetSchemas());
+}
+
+<span class="comment">/**
+ * Parses a JSON string and deserializes it to an Object instance
+ * <span class="attrib">@param</span> {String} json JSON string data to deserialize
+ * <span class="attrib">@type</span> Object
+ */</span>
+App.<span class="reserved">prototype</span>.JSONToObject = <span class="reserved">function</span> App__JSONToObject (json) {
+	<span class="reserved">return</span>(Components.classes[<span class="literal">"@mozilla.org/dom/json;1"</span>]
+		.createInstance(Components.interfaces.nsIJSON)
+		.decode(json));
+}
+
+<span class="comment">/**
+ * Serializes an Object instance to a JSON formatted String
+ * <span class="attrib">@param</span> {Object} obj Object instance to serialize
+ * <span class="attrib">@type</span> String
+ */</span>
+App.<span class="reserved">prototype</span>.ObjectToJSON = <span class="reserved">function</span> App__ObjectToJSON (obj) {
+	<span class="reserved">return</span>(Components.classes[<span class="literal">"@mozilla.org/dom/json;1"</span>]
+		.createInstance(Components.interfaces.nsIJSON)
+		.encode(obj));
+}
+
+<span class="comment">/**
+ * Clones an Exception instance
+ * <span class="attrib">@param</span> {Object} ex Exception to clone
+ * <span class="attrib">@type</span> Object
+ */</span>
+App.<span class="reserved">prototype</span>.CopyException = <span class="reserved">function</span> App__CopyException (ex) {
+	<span class="reserved">return</span>(Utility.CopyException(ex));
+}
+
+<span class="comment">/**
+ * Generates a GUID in the format {xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx}
+ * <span class="attrib">@type</span> String
+ */</span>
+App.<span class="reserved">prototype</span>.GenUUID = <span class="reserved">function</span> App__GenUUID () {
+	<span class="reserved">return</span>(Components.classes[<span class="literal">"@mozilla.org/uuid-generator;1"</span>]
+		.getService(Components.interfaces.nsIUUIDGenerator)
+		.generateUUID()
+		.toString()
+		);
+}
+
+<span class="comment">/** <span class="attrib">@ignore</span> */</span>
+App.<span class="reserved">prototype</span>.OpenNetFile = <span class="reserved">function</span> App__OpenNetFile (url, depth) {
+	<span class="reserved">if</span> (depth == null)
+		depth = 5;
+
+	var ioService = Components.classes[<span class="literal">"@mozilla.org/network/io-service;1"</span>].
+		getService(Components.interfaces.nsIIOService);
+	var oUrl = ioService.newURI(url, null, null);
+	var channel = ioService.newChannelFromURI(oUrl);
+
+	<span class="comment">// TODO: check for other supported channel types</span>
+	<span class="reserved">if</span> (!(channel instanceof Components.interfaces.nsIHttpChannel))
+		throw(<span class="literal">"Unable to open file due to unsupported protocol/channel"</span>);
+
+	var channelHttp = channel.QueryInterface(Components.interfaces.nsIHttpChannel);
+	<span class="comment">//channelHttp.referrer = oUrl;</span>
+	var inStream = Components.classes[<span class="literal">"@mozilla.org/binaryinputstream;1"</span>].
+		createInstance(Components.interfaces.nsIBinaryInputStream);
+	inStream.setInputStream(channelHttp.open());
+	<span class="reserved">if</span> (!channelHttp.requestSucceeded) {
+		<span class="reserved">if</span> (channelHttp.responseStatus == <span class="literal">"302"</span> || channelHttp.responseStatus == <span class="literal">"301"</span>)
+			<span class="reserved">if</span> (depth &gt; 1)
+				<span class="reserved">return</span>(<span class="reserved">this</span>.OpenNetFile(channelHttp.getResponseHeader(<span class="literal">"location"</span>), depth - 1));
+			<span class="reserved">else</span>
+				throw(<span class="literal">"Unable to load file due to redirection limit"</span>);
+		<span class="reserved">else</span>
+			throw(<span class="literal">"Unable to load file due to failed request"</span>);
+	}
+	<span class="reserved">return</span>({
+		<span class="literal">"channel"</span> : channelHttp,
+		<span class="literal">"stream"</span> : inStream
+		});
+}
+
+<span class="comment">/**
+ * Reads the contents of a remote resource
+ * <span class="attrib">@param</span> {String} url URL of the remote resource to read
+ * <span class="attrib">@type</span> String
+ */</span>
+App.<span class="reserved">prototype</span>.ReadNetFile = <span class="reserved">function</span> App__ReadNetFile (url) {
+	var netFile;
+	var sContent = <span class="literal">""</span>;
+
+	try {
+		<span class="comment">// TODO: don't assume http channel</span>
+		netFile = <span class="reserved">this</span>.OpenNetFile(url);
+		<span class="reserved">if</span> (!netFile.channel.requestSucceeded)
+			throw(<span class="literal">"Unable to load file due to failed request"</span>);
+		<span class="reserved">while</span> (netFile.stream.available() || sContent.length &lt; netFile.channel.contentLength) {
+			sContent += netFile.stream.readBytes(netFile.stream.available());
+		}
+		netFile.stream.close();
+		netFile.stream = null;
+	} catch (ex) {
+		<span class="reserved">if</span> (netFile.stream != null) {
+			netFile.stream.close();
+			netFile.stream = null;
+		}
+		throw(<span class="literal">"Unable to load file"</span>);
+	}
+
+	<span class="reserved">return</span>(sContent);
+}
+
+</pre>
+	<hr>
+
+
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> <font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top"><em>
+<b>TripDub</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<font size="-1">
+
+</font>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Tue Nov 24 08:29:37 2009</div>
+</body>
+</html>

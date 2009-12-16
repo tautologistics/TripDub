@@ -1,0 +1,466 @@
+<!doctype html public "-//W3C//DTD HTML 4.0 Frameset//EN""http://www.w3.org/TR/REC-html40/frameset.dtd">
+<html>
+<head>
+<title>
+TripDub Overview
+</title>
+<link rel ="stylesheet" type="text/css" href="stylesheet.css" title="Style">
+<script>
+function asd() {
+	
+		parent.document.title="Cookies.js Overview";
+	
+}
+</script>
+</head>
+<body bgcolor="white" onload="asd();">
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> 	<font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top">
+<em>
+<b>TripDub</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<center>
+	
+	   <h2>Cookies.js</h2>
+	
+</center>
+
+	
+
+
+<h4>Summary</h4>
+<p>
+	
+		Contains the Cookie and Cookies collection classes
+ <BR/><BR/><B>Version: </B>0.8.0<BR/><BR/><B>Author:</B> ChrisWinberry
+ <BR/>
+	
+</p>
+
+<hr>
+
+
+    <table border="1" cellpadding="3" cellspacing="0" width="100%">
+    <tr bgcolor="#CCCCFF" class="TableHeadingColor">
+    <td colspan=2><font size="+2">
+    
+        <b>Class Summary</b>
+    
+    </font></td>
+    </tr>
+    
+    <tr bgcolor="white" class="TableRowColor">
+    <td width="15%"><b><a href="Cookie.html">Cookie</a></b></td>
+    <td>Represents a single request or response cookie
+ </td>
+    </tr>
+    
+    <tr bgcolor="white" class="TableRowColor">
+    <td width="15%"><b><a href="Cookies.html">Cookies</a></b></td>
+    <td>Represents a collection of request or response cookies
+ </td>
+    </tr>
+    
+    </table>
+    <hr/> 
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<!-- ========== END METHOD SUMMARY =========== -->
+
+
+        <pre class="sourceview"><span class="comment">/**
+ * <span class="attrib">@fileoverview</span> Contains the Cookie and Cookies collection classes
+ * <span class="attrib">@author</span> ChrisWinberry
+ * <span class="attrib">@version</span> 0.8.0
+ */</span>
+
+<span class="comment">/**
+ * Creates a new cookie
+ * <span class="attrib">@constructor</span>
+ * <span class="attrib">@class</span> Represents a single request or response cookie
+ * <span class="attrib">@param</span> {String} name Name of the cookie being created
+ * <span class="attrib">@requires</span> Querystring
+ */</span>
+<span class="reserved">function</span> Cookie (name) {
+	<span class="comment">/** <span class="attrib">@ignore</span> */</span>
+	<span class="reserved">this</span>._Name = name;
+	<span class="comment">/** <span class="attrib">@ignore</span> */</span>
+	<span class="reserved">this</span>._Data = new Querystring();
+	<span class="comment">/** <span class="attrib">@ignore</span> */</span>
+	<span class="reserved">this</span>._Domain = <span class="literal">""</span>;
+	<span class="comment">/** <span class="attrib">@ignore</span> */</span>
+	<span class="reserved">this</span>._Path = <span class="literal">""</span>;
+	<span class="comment">/** <span class="attrib">@ignore</span> */</span>
+	<span class="reserved">this</span>._Secure = false;
+	<span class="comment">/** <span class="attrib">@ignore</span> */</span>
+	<span class="reserved">this</span>._Expires = 0;
+}
+
+<span class="comment">/**
+ * Gets the current name of the cookie
+ * <span class="attrib">@type</span> String 
+ */</span>
+Cookie.<span class="reserved">prototype</span>.GetName = <span class="reserved">function</span> Cookie__GetName () { <span class="reserved">return</span>(<span class="reserved">this</span>._Name); }
+<span class="comment">/**
+ * The cookie's name
+ * <span class="attrib">@type</span> String
+ */</span>
+Cookie.<span class="reserved">prototype</span>.__defineGetter__(<span class="literal">"Name"</span>, Cookie.<span class="reserved">prototype</span>.GetName);
+
+<span class="comment">/**
+ * Gets the cookie's data
+ * <span class="attrib">@type</span> Querystring 
+ */</span>
+Cookie.<span class="reserved">prototype</span>.GetData = <span class="reserved">function</span> Cookie__GetData () { <span class="reserved">return</span>(<span class="reserved">this</span>._Data); }
+<span class="comment">/**
+ * Sets the cookie's data
+ * <span class="attrib">@param</span> {String|Querystring} value Any string (querystring formatted or not) or a Querystring instance 
+ */</span>
+Cookie.<span class="reserved">prototype</span>.SetData = <span class="reserved">function</span> Cookie__SetData (value) { <span class="reserved">this</span>._Data.Parse(value); }
+<span class="comment">/**
+ * The cookie's data
+ * <span class="attrib">@type</span> Querystring
+ */</span>
+Cookie.<span class="reserved">prototype</span>.__defineGetter__(<span class="literal">"Data"</span>, Cookie.<span class="reserved">prototype</span>.GetData);
+Cookie.<span class="reserved">prototype</span>.__defineSetter__(<span class="literal">"Data"</span>, Cookie.<span class="reserved">prototype</span>.SetData);
+
+<span class="comment">/**
+ * Gets the cookie's data as originally formatted
+ * <span class="attrib">@type</span> String
+ */</span>
+Cookie.<span class="reserved">prototype</span>.GetRawData = <span class="reserved">function</span> Cookie__GetRawData () { <span class="reserved">return</span>(<span class="reserved">this</span>._Data.toString()); }
+<span class="comment">/**
+ * Sets the cookie's data exactly as formatted
+ * <span class="attrib">@param</span> {String} value Raw cookie data
+ */</span>
+Cookie.<span class="reserved">prototype</span>.SetRawData = <span class="reserved">function</span> Cookie__SetRawData (value) { <span class="reserved">this</span>._Data.Parse(value); }
+<span class="comment">/**
+ * The cookie's unformatted raw data
+ * <span class="attrib">@type</span> String
+ */</span>
+Cookie.<span class="reserved">prototype</span>.__defineGetter__(<span class="literal">"RawData"</span>, Cookie.<span class="reserved">prototype</span>.GetRawData);
+Cookie.<span class="reserved">prototype</span>.__defineSetter__(<span class="literal">"RawData"</span>, Cookie.<span class="reserved">prototype</span>.SetRawData);
+
+<span class="comment">/**
+ * Gets the cookie's path
+ * <span class="attrib">@type</span> String
+ */</span>
+Cookie.<span class="reserved">prototype</span>.GetPath = <span class="reserved">function</span> Cookie__GetPath () { <span class="reserved">return</span>(<span class="reserved">this</span>._Path); }
+<span class="comment">/**
+ * Sets the cookie's path
+ * <span class="attrib">@param</span> {String} value Cookie path
+ */</span>
+Cookie.<span class="reserved">prototype</span>.SetPath = <span class="reserved">function</span> Cookie__SetPath (value) { <span class="reserved">this</span>._Path = value; }
+<span class="comment">/**
+ * The cookie's path
+ * <span class="attrib">@type</span> String
+ */</span>
+Cookie.<span class="reserved">prototype</span>.__defineGetter__(<span class="literal">"Path"</span>, Cookie.<span class="reserved">prototype</span>.GetPath);
+Cookie.<span class="reserved">prototype</span>.__defineSetter__(<span class="literal">"Path"</span>, Cookie.<span class="reserved">prototype</span>.SetPath);
+
+<span class="comment">/**
+ * Gets the cookie's domain
+ * <span class="attrib">@type</span> String
+ */</span>
+Cookie.<span class="reserved">prototype</span>.GetDomain = <span class="reserved">function</span> Cookie__GetDomain () { <span class="reserved">return</span>(<span class="reserved">this</span>._Domain); }
+<span class="comment">/**
+ * Sets the cookie's domain
+ * <span class="attrib">@param</span> {String} value Cookie domain
+ */</span>
+Cookie.<span class="reserved">prototype</span>.SetDomain = <span class="reserved">function</span> Cookie__SetDomain (value) { <span class="reserved">this</span>._Domain = value; }
+<span class="comment">/**
+ * The cookie's domain
+ * <span class="attrib">@type</span> String
+ */</span>
+Cookie.<span class="reserved">prototype</span>.__defineGetter__(<span class="literal">"Domain"</span>, Cookie.<span class="reserved">prototype</span>.GetDomain);
+Cookie.<span class="reserved">prototype</span>.__defineSetter__(<span class="literal">"Domain"</span>, Cookie.<span class="reserved">prototype</span>.SetDomain);
+
+<span class="comment">/**
+ * Gets value indicating if cookie is secure
+ * <span class="attrib">@type</span> Boolean
+ */</span>
+Cookie.<span class="reserved">prototype</span>.GetSecure = <span class="reserved">function</span> Cookie__GetSecure () { <span class="reserved">return</span>(<span class="reserved">this</span>._Secure); }
+<span class="comment">/**
+ * Sets value indicating if cookie is secure
+ * <span class="attrib">@param</span> {Boolean} value Flag indicating cookie is secure or not
+ */</span>
+Cookie.<span class="reserved">prototype</span>.SetSecure = <span class="reserved">function</span> Cookie__SetSecure (value) { <span class="reserved">this</span>._Secure = !!value; }
+<span class="comment">/**
+ * Flag indicating if cookie is secure
+ * <span class="attrib">@type</span> Boolean
+ */</span>
+Cookie.<span class="reserved">prototype</span>.__defineGetter__(<span class="literal">"Secure"</span>, Cookie.<span class="reserved">prototype</span>.GetSecure);
+Cookie.<span class="reserved">prototype</span>.__defineSetter__(<span class="literal">"Secure"</span>, Cookie.<span class="reserved">prototype</span>.SetSecure);
+
+<span class="comment">/**
+ * Gets the cookie's expiration date as unix timestamp
+ * <span class="attrib">@type</span> Int
+ */</span>
+Cookie.<span class="reserved">prototype</span>.GetExpiresEpoch = <span class="reserved">function</span> Cookie__GetExpiresEpoch () { <span class="reserved">return</span>(<span class="reserved">this</span>._Expires); }
+<span class="comment">/**
+ * Sets the cookie's expiration date as unix timestamp
+ * <span class="attrib">@param</span> {Int} value Cookie expiration time (for session cookies pass 0 or null)
+ */</span>
+Cookie.<span class="reserved">prototype</span>.SetExpiresEpoch = <span class="reserved">function</span> Cookie__SetExpiresEpoch (value) { <span class="reserved">this</span>._ExpiresEpoch = value; }
+<span class="comment">/**
+ * The cookie's expiration as unix timestamp
+ * <span class="attrib">@type</span> Int
+ */</span>
+Cookie.<span class="reserved">prototype</span>.__defineGetter__(<span class="literal">"ExpiresEpoch"</span>, Cookie.<span class="reserved">prototype</span>.GetExpiresEpoch);
+Cookie.<span class="reserved">prototype</span>.__defineSetter__(<span class="literal">"ExpiresEpoch"</span>, Cookie.<span class="reserved">prototype</span>.SetExpiresEpoch);
+
+<span class="comment">/**
+ * Gets the cookie's expiration date as GMT formatted string
+ * <span class="attrib">@type</span> String
+ */</span>
+Cookie.<span class="reserved">prototype</span>.GetExpiresDate = <span class="reserved">function</span> Cookie__GetExpiresDate () {
+	var exp = new Date();
+	exp.setTime(<span class="reserved">this</span>._Expires * 1000);
+	<span class="reserved">return</span>(exp.toGMTString());
+}
+<span class="comment">/**
+ * Sets the cookie's expiration time
+ * <span class="attrib">@param</span> {Date|String} value Cookie expiration time
+ */</span>
+Cookie.<span class="reserved">prototype</span>.SetExpiresDate = <span class="reserved">function</span> Cookie__SetExpiresDate (value) {
+	try {
+		value = new Date(value);
+		<span class="reserved">this</span>._Expires = Math.round(value.getTime() / 1000.0);
+	}
+	catch (ex) { <span class="reserved">this</span>._Expires = 0; }
+}
+<span class="comment">/**
+ * The cookie's expiration as a GMT formatted string
+ * <span class="attrib">@type</span> Date|String
+ */</span>
+Cookie.<span class="reserved">prototype</span>.__defineGetter__(<span class="literal">"ExpiresDate"</span>, Cookie.<span class="reserved">prototype</span>.GetExpiresDate);
+Cookie.<span class="reserved">prototype</span>.__defineSetter__(<span class="literal">"ExpiresDate"</span>, Cookie.<span class="reserved">prototype</span>.SetExpiresDate);
+
+<span class="comment">/**
+ * Formats the cookie as a valid HTTP header value
+ * <span class="attrib">@type</span> String
+ */</span>
+Cookie.<span class="reserved">prototype</span>.toString = <span class="reserved">function</span> Cookie__toString () {
+	var retVal = escape(<span class="reserved">this</span>._Name) + <span class="literal">"="</span> + escape(<span class="reserved">this</span>._Data.toString());
+	<span class="comment">//TODO: escape these?</span>
+	<span class="reserved">if</span> (<span class="reserved">this</span>._Path != <span class="literal">""</span>)
+		retVal += <span class="literal">"; path="</span> + <span class="reserved">this</span>._Path;
+	<span class="reserved">if</span> (<span class="reserved">this</span>._Domain != <span class="literal">""</span>)
+		retVal += <span class="literal">"; domain="</span> + <span class="reserved">this</span>._Domain;
+	<span class="reserved">if</span> (<span class="reserved">this</span>._Secure)
+		retVal += <span class="literal">"; secure="</span> + <span class="reserved">this</span>._Secure;
+	<span class="reserved">if</span> (<span class="reserved">this</span>._Expires &gt; 0)
+		retVal += <span class="literal">"; expires="</span> + <span class="reserved">this</span>.GetExpiresDate();
+
+	<span class="reserved">return</span>(retVal);
+}
+
+<span class="comment">/**
+ * Creates a new cookies collection
+ * <span class="attrib">@constructor</span>
+ * <span class="attrib">@class</span> Represents a collection of request or response cookies
+ * <span class="attrib">@requires</span> Cookie
+ */</span>
+<span class="reserved">function</span> Cookies () {
+	<span class="comment">/** <span class="attrib">@ignore</span> */</span>
+ 	<span class="reserved">this</span>._cookies = [];
+ }
+
+<span class="comment">/**
+ * Parses an HTTP cookie header and loads the cookies into the collection
+ * <span class="attrib">@param</span> {Headers} headers Headers collection containing the cookie data to parse
+ */</span>
+Cookies.<span class="reserved">prototype</span>.Parse = <span class="reserved">function</span> Cookies__Parse (headers) {
+	<span class="comment">//TODO: split this into a Cookie.Parse function</span>
+	var cookieHeaders = headers.Get(<span class="literal">"cookie"</span>);
+
+	<span class="reserved">while</span> (cookieHeaders.length) {
+		var cookieHeader = cookieHeaders.shift();
+		var cookies = cookieHeader.GetValue().split(/(?:;\s*)/);
+		<span class="reserved">while</span> (cookies.length) {
+			var cookie = cookies.shift();
+			var pieces = cookie.split(/=/);
+			var key = unescape(pieces.shift());
+			<span class="reserved">this</span>.Set(key, unescape(pieces.join(<span class="literal">'='</span>)));
+		}
+	}
+}
+
+<span class="comment">/**
+ * Writes out the cookie collection to a Headers collection
+ * <span class="attrib">@param</span> {Headers} headers Headers collection to add the cookie headers to
+ */</span>
+Cookies.<span class="reserved">prototype</span>.Write = <span class="reserved">function</span> Cookies__Write (headers) {
+	<span class="reserved">for</span> (key in <span class="reserved">this</span>._cookies) {
+		headers.Add(<span class="literal">"Set-Cookie"</span>, <span class="reserved">this</span>._cookies[key].toString());
+	}
+}
+
+<span class="comment">/**
+ * Fetches a cookie from the collection. If the name is not found, a new cookie with that name is added to the collection and returned
+ * <span class="attrib">@param</span> {String} name The cookie name to search for
+ * <span class="attrib">@type</span> Cookie
+ */</span>
+Cookies.<span class="reserved">prototype</span>.Get = <span class="reserved">function</span> Cookies__Get (name) {
+	var key = name.toString().toLowerCase();
+	var cookie = <span class="reserved">this</span>._cookies[key]
+	<span class="reserved">if</span> (cookie == null) {
+		cookie = new Cookie(name);
+		<span class="reserved">this</span>._cookies[key] = cookie
+	}
+	<span class="reserved">return</span>(cookie);
+}
+
+<span class="comment">/**
+ * Fetches all the cookies in the collection
+ * <span class="attrib">@type</span> Cookies[]
+ */</span>
+Cookies.<span class="reserved">prototype</span>.GetAll = <span class="reserved">function</span> Cookies__GetAll () {
+	var newSet = new Array();
+
+	<span class="reserved">for</span> (var key in <span class="reserved">this</span>._cookies)
+		newSet.push(<span class="reserved">this</span>._cookies[key]);
+
+	<span class="reserved">return</span>(newSet);
+}
+
+<span class="comment">/**
+ * Adds or replaces a cookie in the collection
+ * <span class="attrib">@param</span> {String} name Name of the cookie
+ * <span class="attrib">@param</span> {String|Cookie} value Cookie instance or HTTP header formatted cookie data
+ * <span class="attrib">@type</span> Cookie
+ */</span>
+Cookies.<span class="reserved">prototype</span>.Set = <span class="reserved">function</span> Cookies__Set (name, value) {
+	var cookie = <span class="reserved">this</span>.Get(name);
+
+	cookie.GetData().Parse(value);
+
+	<span class="reserved">return</span>(cookie);
+}
+
+<span class="comment">//TODO: add Cookies.Add(&lt;Cookie&gt; cookie) [with a check for parameter type]</span>
+
+<span class="comment">/**
+ * Removes a cookie from the collection
+ * <span class="attrib">@param</span> {String} name Name of the cookie to remove
+ */</span>
+Cookies.<span class="reserved">prototype</span>.Remove = <span class="reserved">function</span> Cookies__Remove (name) {
+	delete <span class="reserved">this</span>._cookies[name.toString().toLowerCase()];
+}
+
+<span class="comment">/**
+ * Clears all cookies from the collection
+ */</span>
+Cookies.<span class="reserved">prototype</span>.Clear = <span class="reserved">function</span> Cookies__Clear () {
+	<span class="reserved">this</span>._cookies = [];
+}
+</pre>
+	<hr>
+
+
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> <font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top"><em>
+<b>TripDub</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<font size="-1">
+
+</font>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Tue Nov 24 08:29:37 2009</div>
+</body>
+</html>

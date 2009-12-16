@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+<!-- https://developer.mozilla.org/en/XUL/browser#Examples -->
+<window id="main" title="My App" width="1000" height="800" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+	<script type="application/x-javascript" src="chrome://myapp/content/tripdub.js"/>
+
+	<script>
+		function quit (aForceQuit) {
+			var appStartup = Components.classes['@mozilla.org/toolkit/app-startup;1']
+				.getService(Components.interfaces.nsIAppStartup);
+			
+			// eAttemptQuit will try to close each XUL window, but the XUL window can cancel the quit
+			// process if there is unsaved data. eForceQuit will quit no matter what.
+			var quitSeverity = aForceQuit ?
+				Components.interfaces.nsIAppStartup.eForceQuit
+				:
+				Components.interfaces.nsIAppStartup.eAttemptQuit
+				;
+			appStartup.quit(quitSeverity);
+		}
+
+		function toOpenWindowByType (inType, uri, features) {
+			var windowManager = Components.classes['@mozilla.org/appshell/window-mediator;1'].getService();
+			var windowManagerInterface = windowManager.QueryInterface(Components.interfaces.nsIWindowMediator);
+			var topWindow = windowManagerInterface.getMostRecentWindow(inType);
+		
+			if (topWindow)
+				topWindow.focus();
+			else if (features)
+				window.open(uri, "_blank", features);
+			else
+				window.open(uri, "_blank", "chrome,extrachrome,menubar,resizable,scrollbars,status,toolbar");
+		}
+
+		function toJavaScriptConsole () {
+			toOpenWindowByType("global:console", "chrome://global/content/console.xul");
+		}
+
+		toJavaScriptConsole();
+	</script>
+
+	<commandset id="mainCommandSet">
+ 	   <command id="cmd_quitApplication" oncommand="quit(false);" />
+ 	   <command id="cmd_errorConsole" oncommand="toJavaScriptConsole();" />
+	</commandset>
+
+	<keyset id="mainKeyset">
+		<key id="key_quitApplication" key="Q" command="cmd_quitApplication" modifiers="accel"/>
+		<key id="key_errorConsole" key="E" oncommand="cmd_errorConsole" modifiers="accel,shift"/>
+	</keyset>
+
+	<menubar id="sample-menubar">
+		<menu id="file-menu" label="File">
+			<menupopup id="file-popup">
+			<menuitem label="New"/>
+			<menuitem label="Open"/>
+			<menuitem label="Save"/>
+			<menuseparator/>
+			<!-- <menuitem label="Quit" acceltext="Q" accesskey="q" id="menu_FileQuitItem" oncommand="quit(false);" /> -->
+			<menuitem id="menu_FileQuitItem" 
+				label="Quit"
+				key="key_quitApplication"
+				command="cmd_quitApplication"/>
+			</menupopup>
+		</menu>
+		<menu id="edit-menu" label="Edit">
+			<menupopup id="edit-popup">
+			<menuitem label="Undo"/>
+			<menuitem label="Redo"/>
+			</menupopup>
+		</menu>
+		<menu id="tools-menu" label="Tools" accesskey="E">
+			<menuitem id="javascriptConsole" 
+				label="Error Console" accesskey="E" 
+				key="key_errorConsole" command="cmd_errorConsole" />
+		</menu>
+	</menubar>
+
+	<browser id="browser" type="content" src="chrome://myapp/content/splash.html" flex="1"/>
+
+</window>

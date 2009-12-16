@@ -1,0 +1,664 @@
+<!doctype html public "-//W3C//DTD HTML 4.0 Frameset//EN""http://www.w3.org/TR/REC-html40/frameset.dtd">
+<html>
+<head>
+<title>
+TripDub Overview
+</title>
+<link rel ="stylesheet" type="text/css" href="stylesheet.css" title="Style">
+<script>
+function asd() {
+	
+		parent.document.title="Database.js Overview";
+	
+}
+</script>
+</head>
+<body bgcolor="white" onload="asd();">
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> 	<font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top">
+<em>
+<b>TripDub</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<center>
+	
+	   <h2>Database.js</h2>
+	
+</center>
+
+	
+
+
+<h4>Summary</h4>
+<p>
+	
+		Contains the classes for DB access
+ <BR/><BR/><B>Version: </B>0.8.0<BR/><BR/><B>Author:</B> ChrisWinberry
+ <BR/>
+	
+</p>
+
+<hr>
+
+
+    <table border="1" cellpadding="3" cellspacing="0" width="100%">
+    <tr bgcolor="#CCCCFF" class="TableHeadingColor">
+    <td colspan=2><font size="+2">
+    
+        <b>Class Summary</b>
+    
+    </font></td>
+    </tr>
+    
+    <tr bgcolor="white" class="TableRowColor">
+    <td width="15%"><b><a href="DbColumn.html">DbColumn</a></b></td>
+    <td>Represents a column of a DB table
+ </td>
+    </tr>
+    
+    <tr bgcolor="white" class="TableRowColor">
+    <td width="15%"><b><a href="DbConnection.html">DbConnection</a></b></td>
+    <td>Represents a DB connections
+ </td>
+    </tr>
+    
+    <tr bgcolor="white" class="TableRowColor">
+    <td width="15%"><b><a href="DbQuery.html">DbQuery</a></b></td>
+    <td>Represents a prepared DB query
+ </td>
+    </tr>
+    
+    <tr bgcolor="white" class="TableRowColor">
+    <td width="15%"><b><a href="DbTable.html">DbTable</a></b></td>
+    <td>Represents a table in a DB
+ </td>
+    </tr>
+    
+    </table>
+    <hr/> 
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<!-- ========== END METHOD SUMMARY =========== -->
+
+
+        <pre class="sourceview"><span class="comment">/**
+ * <span class="attrib">@fileoverview</span> Contains the classes for DB access
+ * <span class="attrib">@author</span> ChrisWinberry
+ * <span class="attrib">@version</span> 0.8.0
+ */</span>
+
+<span class="comment">/**
+ * Creates a new DbColumn
+ * <span class="attrib">@constructor</span>
+ * <span class="attrib">@class</span> Represents a column of a DB table
+ * <span class="attrib">@param</span> {Hash} row {<span class="attrib">@link</span> DbQuery} result row containing information about a table column
+ */</span>
+<span class="reserved">function</span> DbColumn (row) {
+	<span class="comment">/** <span class="attrib">@ignore</span> */</span>
+	<span class="reserved">this</span>._Name = row[<span class="literal">"name"</span>];
+	<span class="comment">/** <span class="attrib">@ignore</span> */</span>
+	<span class="reserved">this</span>._Type = row[<span class="literal">"type"</span>].toLowerCase();
+	<span class="comment">/** <span class="attrib">@ignore</span> */</span>
+	<span class="reserved">this</span>._Id = row[<span class="literal">"cid"</span>];
+	<span class="comment">/** <span class="attrib">@ignore</span> */</span>
+	<span class="reserved">this</span>._Default = (row[<span class="literal">"dflt_value"</span>] != null) ? row[<span class="literal">"dflt_value"</span>] : <span class="literal">""</span>;
+	<span class="comment">/** <span class="attrib">@ignore</span> */</span>
+	<span class="reserved">this</span>._Primary = (row[<span class="literal">"pk"</span>] == 1);
+	<span class="comment">/** <span class="attrib">@ignore</span> */</span>
+	<span class="reserved">this</span>._Nullable = (row[<span class="literal">"notnull"</span>] == 1);
+}
+
+<span class="comment">/**
+ * Gets the name of the column
+ * <span class="attrib">@type</span> String
+ */</span>
+DbColumn.<span class="reserved">prototype</span>.GetName = <span class="reserved">function</span> DbColumn__GetName () { <span class="reserved">return</span>(<span class="reserved">this</span>._Name); }
+<span class="comment">/**
+ * The name of the column
+ * <span class="attrib">@type</span> String
+ */</span>
+DbColumn.<span class="reserved">prototype</span>.__defineGetter__(<span class="literal">"Name"</span>, DbColumn.<span class="reserved">prototype</span>.GetName);
+
+<span class="comment">/**
+ * Gets the data type of the column
+ * <span class="attrib">@type</span> String
+ */</span>
+DbColumn.<span class="reserved">prototype</span>.GetType = <span class="reserved">function</span> DbColumn__GetType () { <span class="reserved">return</span>(<span class="reserved">this</span>._Type); }
+<span class="comment">/**
+ * The data type of the column
+ * <span class="attrib">@type</span> String
+ */</span>
+DbColumn.<span class="reserved">prototype</span>.__defineGetter__(<span class="literal">"Type"</span>, DbColumn.<span class="reserved">prototype</span>.GetType);
+
+<span class="comment">/**
+ * Gets the ID of the column
+ * <span class="attrib">@type</span> Int
+ */</span>
+DbColumn.<span class="reserved">prototype</span>.GetId = <span class="reserved">function</span> DbColumn__GetId () { <span class="reserved">return</span>(<span class="reserved">this</span>._Id); }
+<span class="comment">/**
+ * The ID of the column
+ * <span class="attrib">@type</span> Int
+ */</span>
+DbColumn.<span class="reserved">prototype</span>.__defineGetter__(<span class="literal">"Id"</span>, DbColumn.<span class="reserved">prototype</span>.GetId);
+
+<span class="comment">/**
+ * Gets the default value of the column
+ * <span class="attrib">@type</span> Object
+ */</span>
+DbColumn.<span class="reserved">prototype</span>.GetDefault = <span class="reserved">function</span> DbColumn__GetDefault () { <span class="reserved">return</span>(<span class="reserved">this</span>._Default); }
+<span class="comment">/**
+ * The default value of the column
+ * <span class="attrib">@type</span> Object
+ */</span>
+DbColumn.<span class="reserved">prototype</span>.__defineGetter__(<span class="literal">"Default"</span>, DbColumn.<span class="reserved">prototype</span>.GetDefault);
+
+<span class="comment">/**
+ * Gets a flag indicating if the column is the primary key
+ * <span class="attrib">@type</span> Boolean
+ */</span>
+DbColumn.<span class="reserved">prototype</span>.GetPrimary = <span class="reserved">function</span> DbColumn__GetPrimary () { <span class="reserved">return</span>(<span class="reserved">this</span>._Primary); }
+<span class="comment">/**
+ * Flag indicating if the column is the primary key
+ * <span class="attrib">@type</span> Boolean
+ */</span>
+DbColumn.<span class="reserved">prototype</span>.__defineGetter__(<span class="literal">"Primary"</span>, DbColumn.<span class="reserved">prototype</span>.GetPrimary);
+
+<span class="comment">/**
+ * Gets a flag indicating if the column is nullable
+ * <span class="attrib">@type</span> Boolean
+ */</span>
+DbColumn.<span class="reserved">prototype</span>.GetNullable = <span class="reserved">function</span> DbColumn__GetNullable () { <span class="reserved">return</span>(<span class="reserved">this</span>._Nullable); }
+<span class="comment">/**
+ * Flag indicating if the column is nullable
+ * <span class="attrib">@type</span> Boolean
+ */</span>
+DbColumn.<span class="reserved">prototype</span>.__defineGetter__(<span class="literal">"Nullable"</span>, DbColumn.<span class="reserved">prototype</span>.GetNullable);
+
+<span class="comment">/**
+ * Creates a new DbTable instance and loads the properties for the specified table name
+ * <span class="attrib">@constructor</span>
+ * <span class="attrib">@class</span> Represents a table in a DB
+ * <span class="attrib">@param</span> {String} name Name of the table
+ * <span class="attrib">@param</span> {DbConnection} db The DB connection to use for querying the table properties
+ * <span class="attrib">@requires</span> DbColumn
+ */</span>
+<span class="reserved">function</span> DbTable (name, db) {
+	<span class="comment">/** <span class="attrib">@ignore</span> */</span>
+	<span class="reserved">this</span>._Name = name;
+	<span class="comment">/** <span class="attrib">@ignore</span> */</span>
+	<span class="reserved">this</span>._Columns = [];
+
+	var query = db.Prepare(<span class="literal">"PRAGMA TABLE_INFO('"</span> + <span class="reserved">this</span>._Name + <span class="literal">"')"</span>);
+	var results = query.Exec();
+	<span class="reserved">for</span> (var i = 0; i &lt; results.length; i++)
+		<span class="reserved">this</span>._Columns[<span class="reserved">this</span>._Columns.length] = new DbColumn(results[i]);
+
+	query.Free();
+}
+
+<span class="comment">/**
+ * Gets the name of the table
+ * <span class="attrib">@type</span> String
+ */</span>
+DbTable.<span class="reserved">prototype</span>.GetName = <span class="reserved">function</span> DbTable__GetName () { <span class="reserved">return</span>(<span class="reserved">this</span>._Name); }
+<span class="comment">/**
+ * The name of the table
+ * <span class="attrib">@type</span> String
+ */</span>
+DbTable.<span class="reserved">prototype</span>.__defineGetter__(<span class="literal">"Name"</span>, DbTable.<span class="reserved">prototype</span>.GetName);
+
+<span class="comment">/**
+ * Gets the list of columns in the table
+ * <span class="attrib">@type</span> DbColumn[]
+ */</span>
+DbTable.<span class="reserved">prototype</span>.GetColumns = <span class="reserved">function</span> DbTable__GetColumns () { <span class="reserved">return</span>(<span class="reserved">this</span>._Columns); }
+<span class="comment">/**
+ * The list of columns in the table
+ * <span class="attrib">@type</span> DbColumn[]
+ */</span>
+DbTable.<span class="reserved">prototype</span>.__defineGetter__(<span class="literal">"Columns"</span>, DbTable.<span class="reserved">prototype</span>.GetColumns);
+
+<span class="comment">/**
+ * Creates a new DbQuery instance containing a prepared query
+ * <span class="attrib">@constructor</span>
+ * <span class="attrib">@class</span> Represents a prepared DB query
+ * <span class="attrib">@param</span> {DbConnection} dbConn The DB connection to use for executing the query
+ * <span class="attrib">@param</span> {String} sql The SQL statement to be executed
+ */</span>
+<span class="reserved">function</span> DbQuery (dbConn, sql) {
+	<span class="comment">/** <span class="attrib">@ignore</span> */</span>
+	<span class="reserved">this</span>._conn = dbConn;
+	<span class="comment">/** <span class="attrib">@ignore</span> */</span>
+	<span class="reserved">this</span>._sql = sql;
+	<span class="comment">/** <span class="attrib">@ignore</span> */</span>
+	<span class="reserved">this</span>._query = <span class="reserved">this</span>._conn.createStatement(<span class="reserved">this</span>._sql);
+}
+
+<span class="comment">/**
+ * Logs data to the console
+ * <span class="attrib">@param</span> {Object} data Data to be logged to the console
+ */</span>
+DbQuery.<span class="reserved">prototype</span>.Log = <span class="reserved">function</span> DbQuery__Log (data) { <span class="reserved">if</span> (typeof Log == <span class="literal">"function"</span>) { Log(data); } };
+
+<span class="comment">/**
+ * Gets the SQL statement to be executed
+ * <span class="attrib">@type</span> String
+ */</span>
+DbQuery.<span class="reserved">prototype</span>.GetStatement = <span class="reserved">function</span> DbTable__GetStatement () { <span class="reserved">return</span>(<span class="reserved">this</span>._sql); }
+<span class="comment">/**
+ * The SQL statement to be executed
+ * <span class="attrib">@type</span> String
+ */</span>
+DbQuery.<span class="reserved">prototype</span>.__defineGetter__(<span class="literal">"Statement"</span>, DbQuery.<span class="reserved">prototype</span>.GetStatement);
+
+<span class="comment">/**
+ * Executes the prepared SQL statement using any arguments passed in as parameterized values
+ * <span class="attrib">@type</span> Object[][]
+ */</span>
+DbQuery.<span class="reserved">prototype</span>.Exec = <span class="reserved">function</span> DbQuery__Exec (<span class="comment">/* n arguments */</span>) {
+	var self = <span class="reserved">this</span>;
+	<span class="reserved">return</span>(
+		ThreadJob.Call(
+			DbConnection.ExecThread,
+			false,
+			<span class="reserved">function</span> (args) { <span class="reserved">return</span>(self.__Exec__(args)); },
+			arguments
+			)
+		);
+}
+
+<span class="comment">/**
+ * Executes the prepared SQL statement asynchronously using any arguments passed in as parameterized values.
+ */</span>
+DbQuery.<span class="reserved">prototype</span>.ExecAsync = <span class="reserved">function</span> DbQuery__ExecAsync (<span class="comment">/* n arguments */</span>) {
+	var self = <span class="reserved">this</span>;
+	ThreadJob.Call(
+		DbConnection.ExecThread,
+		true,
+		<span class="reserved">function</span> (args) { self.__Exec__(args); },
+		arguments
+		);
+}
+
+<span class="comment">//DbQuery.prototype.Exec = function DbQuery__Exec (/* n arguments */) {</span>
+<span class="comment">//	for (var i = 0; i &lt; arguments.length; i++) {</span>
+<span class="comment">//		if (arguments[i] == null)</span>
+<span class="comment">//			this._query.bindNullParameter(i);</span>
+<span class="comment">//		else if (typeof(arguments[i]) == "string")</span>
+<span class="comment">//			this._query.bindUTF8StringParameter(i, arguments[i]);</span>
+<span class="comment">//		else if (typeof(arguments[i]) == "number")</span>
+<span class="comment">//			if (parseInt(arguments[i]) != parseFloat(arguments[i]))</span>
+<span class="comment">//				this._query.bindDoubleParameter(i, arguments[i]);</span>
+<span class="comment">//			else</span>
+<span class="comment">//				this._query.bindInt32Parameter(i, arguments[i]);</span>
+<span class="comment">//		else</span>
+<span class="comment">//			this._query.bindUTF8StringParameter(i, arguments[i].toString()); // bindBlobParameter ??? </span>
+<span class="comment">//	}</span>
+<span class="comment">//	</span>
+<span class="comment">//	var result = [];</span>
+<span class="comment">//	while (this._query.executeStep()) {</span>
+<span class="comment">//		var row = [];</span>
+<span class="comment">//		for(var i = 0; i &lt; this._query.columnCount; i++)</span>
+<span class="comment">//			row[this._query.getColumnName(i)] = this._query.getUTF8String(i);</span>
+<span class="comment">//		result.push(row);</span>
+<span class="comment">//	}</span>
+<span class="comment">//</span>
+<span class="comment">//	this._query.reset();</span>
+<span class="comment">//</span>
+<span class="comment">//	return(result);</span>
+<span class="comment">//}</span>
+<span class="comment">/** <span class="attrib">@ignore</span> */</span>
+DbQuery.<span class="reserved">prototype</span>.__Exec__ = <span class="reserved">function</span> DbQuery____Exec__ (args) {
+	try {
+		<span class="reserved">for</span> (var i = 0; i &lt; args.length; i++) {
+			<span class="reserved">if</span> (args[i] == null)
+				<span class="reserved">this</span>._query.bindNullParameter(i);
+			<span class="reserved">else</span> <span class="reserved">if</span> (typeof(args[i]) == <span class="literal">"string"</span>)
+				<span class="reserved">this</span>._query.bindUTF8StringParameter(i, args[i]);
+			<span class="reserved">else</span> <span class="reserved">if</span> (typeof(args[i]) == <span class="literal">"number"</span>)
+				<span class="reserved">if</span> (parseInt(args[i]) != parseFloat(args[i]))
+					<span class="reserved">this</span>._query.bindDoubleParameter(i, args[i]);
+				<span class="reserved">else</span>
+					<span class="reserved">this</span>._query.bindInt32Parameter(i, args[i]);
+			<span class="reserved">else</span>
+				<span class="reserved">this</span>._query.bindUTF8StringParameter(i, args[i].toString()); <span class="comment">// bindBlobParameter ??? </span>
+		}
+
+		var result = [];
+		<span class="reserved">while</span> (<span class="reserved">this</span>._query.executeStep()) {
+			var row = [];
+			<span class="reserved">for</span>(var i = 0; i &lt; <span class="reserved">this</span>._query.columnCount; i++)
+				row[<span class="reserved">this</span>._query.getColumnName(i)] = <span class="reserved">this</span>._query.getUTF8String(i);
+			result.push(row);
+		}
+
+		<span class="reserved">this</span>._query.reset();
+
+		<span class="reserved">return</span>(result);
+	} catch (ex) {
+		<span class="comment">//this.Log("ERROR: " + ex);</span>
+		throw ex;
+		<span class="comment">//return([]);</span>
+	}
+}
+
+<span class="comment">/**
+ * Frees the prepared query resource. Should be called when done using an instance
+ */</span>
+DbQuery.<span class="reserved">prototype</span>.Free = <span class="reserved">function</span> DbQuery__Free () {
+	<span class="reserved">this</span>._query.reset();
+}
+
+<span class="comment">/**
+ * Creates a new DbConnection instance and opens the named DB
+ * <span class="attrib">@constructor</span>
+ * <span class="attrib">@class</span> Represents a DB connections
+ * <span class="attrib">@param</span> {String} name Name of the DB to connect to
+ * <span class="attrib">@requires</span> DbQuery
+ * <span class="attrib">@requires</span> DbTable
+ */</span>
+<span class="reserved">function</span> DbConnection (name) {
+	<span class="comment">/*
+	this.currentThread = Components.classes["<span class="attrib">@mozilla</span>.org/thread-manager;1"]
+		.getService()
+		.currentThread;
+	while (this.currentThread.hasPendingEvents())
+		this.currentThread.processNextEvent(false);
+	mainThread.dispatch(this, mainThread.DISPATCH_NORMAL);
+	*/</span>
+	<span class="comment">/** <span class="attrib">@ignore</span> */</span>
+	<span class="reserved">this</span>._Name = name;
+	<span class="comment">/** <span class="attrib">@ignore</span> */</span>
+	<span class="reserved">this</span>._connection = null;
+	<span class="reserved">this</span>.Open();
+}
+
+<span class="comment">/** <span class="attrib">@ignore</span> */</span>
+DbConnection.FileExtension = <span class="literal">"sqlite"</span>;
+<span class="comment">/** <span class="attrib">@ignore</span> */</span>
+DbConnection.FolderName = <span class="literal">"TripDubDatabases"</span>;
+<span class="comment">/** <span class="attrib">@ignore</span> */</span>
+DbConnection.ExecThread = Components.classes[<span class="literal">"@mozilla.org/thread-manager;1"</span>].getService().newThread(0);
+<span class="comment">/** <span class="attrib">@ignore</span> */</span>
+<span class="comment">//DbConnection.ExecThread.priority = -3; //TODO: remove this</span>
+
+<span class="comment">/**
+ * Logs data to the console
+ * <span class="attrib">@param</span> {Object} data Data to be logged to the console
+ */</span>
+DbConnection.<span class="reserved">prototype</span>.Log = <span class="reserved">function</span> DbConnection__Log (data) { <span class="reserved">if</span> (typeof Log == <span class="literal">"function"</span>) { Log(data); } };
+
+<span class="comment">/**
+ * Gets the folder where databases are written to
+ * <span class="attrib">@type</span> nsIFile
+ */</span>
+DbConnection.SchemaFolder = <span class="reserved">function</span> DbConnection__SchemaFolder () {
+	var path = Components.classes[<span class="literal">"@mozilla.org/file/directory_service;1"</span>]
+		.getService(Components.interfaces.nsIProperties)
+		.get(<span class="literal">"ProfD"</span>, Components.interfaces.nsIFile);
+	path.append(DbConnection.FolderName);
+	<span class="reserved">return</span>(path);
+}
+
+<span class="comment">/**
+ * Gets a list of the names of existing databases found in the {<span class="attrib">@link</span> #SchemaFolder}
+ * <span class="attrib">@type</span> String[] 
+ */</span>
+DbConnection.GetSchemas = <span class="reserved">function</span> DbConnection__GetSchemas () {
+	var file = DbConnection.SchemaFolder();
+	var dirEntries = file.directoryEntries;
+	var reStorage = new RegExp(<span class="literal">"(.+)\\."</span> + DbConnection.FileExtension + <span class="literal">"$"</span>, <span class="literal">"i"</span>);
+	var dbs = [];
+	<span class="reserved">while</span> (dirEntries.hasMoreElements()) {
+		var dirEntry = dirEntries.getNext().QueryInterface(Components.interfaces.nsIFile);
+		<span class="reserved">if</span> (!dirEntry.isDirectory()) {
+			var found = reStorage.exec(dirEntry.leafName);
+			<span class="reserved">if</span> (found)
+				dbs.push(found[1]);
+		}
+	}
+
+	<span class="reserved">return</span>(dbs);
+}
+
+<span class="comment">/**
+ * Gets the name of the database
+ * <span class="attrib">@type</span> String
+ */</span>
+DbConnection.<span class="reserved">prototype</span>.GetName = <span class="reserved">function</span> DbConnection__GetName () { <span class="reserved">return</span>(<span class="reserved">this</span>._Name); }
+<span class="comment">/**
+ * The name of the database
+ * <span class="attrib">@type</span> String
+ */</span>
+DbConnection.<span class="reserved">prototype</span>.__defineGetter__(<span class="literal">"Name"</span>, DbConnection.<span class="reserved">prototype</span>.GetName);
+
+<span class="comment">/**
+ * Gets the folder where databases are written to
+ * <span class="attrib">@type</span> nsIFile
+ */</span>
+DbConnection.<span class="reserved">prototype</span>.SchemaFolder = DbConnection.SchemaFolder;
+
+<span class="comment">/**
+ * Gets a list of the names of existing databases found in the {<span class="attrib">@link</span> #SchemaFolder}
+ * <span class="attrib">@type</span> String[]
+ */</span>
+DbConnection.<span class="reserved">prototype</span>.GetSchemas = DbConnection.GetSchemas<span class="comment">//(){};</span>
+<span class="comment">/**
+ * A list of the names of existing databases found in the {<span class="attrib">@link</span> #SchemaFolder}
+ * <span class="attrib">@type</span> String[] 
+ */</span>
+DbConnection.<span class="reserved">prototype</span>.__defineGetter__(<span class="literal">"Schemas"</span>, DbConnection.<span class="reserved">prototype</span>.GetSchemas);
+
+<span class="comment">/**
+ * Opens a connection to the database. It is already called in the constructor but is useful if {<span class="attrib">@link</span> #Close} has been called
+ */</span>
+DbConnection.<span class="reserved">prototype</span>.Open = <span class="reserved">function</span> DbConnection__Open () {
+	try {
+		var path = <span class="reserved">this</span>.SchemaFolder(); <span class="comment">// ???</span>
+		path.append(<span class="reserved">this</span>.GetName() + <span class="literal">"."</span> + DbConnection.FileExtension);
+		<span class="reserved">this</span>._connection = Components.classes[<span class="literal">"@mozilla.org/storage/service;1"</span>]
+			.getService(Components.interfaces.mozIStorageService)
+			.openDatabase(path);
+	} catch (ex) {
+		<span class="reserved">this</span>._connection = null;
+		throw <span class="literal">"Failed to create/open the database"</span>;
+	}
+}
+
+<span class="comment">/**
+ * Closes the connection to the database
+ */</span>
+DbConnection.<span class="reserved">prototype</span>.Close = <span class="reserved">function</span> DbConnection__Close () {
+	<span class="reserved">this</span>._connection = null;
+}
+
+<span class="comment">/**
+ * Gets a list of the tables that exist in the database
+ * <span class="attrib">@type</span> DbTable[]
+ */</span>
+DbConnection.<span class="reserved">prototype</span>.GetTables = <span class="reserved">function</span> DbConnection__GetTables () {
+	var tables = [];
+
+	var query = <span class="reserved">this</span>.Prepare(<span class="literal">"SELECT * FROM sqlite_master WHERE type = 'table'"</span>);
+	var results = query.Exec();
+	<span class="reserved">for</span> (var i = 0; i &lt; results.length; i++) {
+		var row = results[i];
+		tables[tables.length] = new DbTable(row[<span class="literal">"tbl_name"</span>], <span class="reserved">this</span>);
+	}
+	query.Free();
+
+	<span class="reserved">return</span>(tables);
+}
+<span class="comment">/**
+ * A list of the tables that exist in the database
+ * <span class="attrib">@type</span> DbTable[]
+ */</span>
+DbConnection.<span class="reserved">prototype</span>.__defineGetter__(<span class="literal">"Tables"</span>, DbConnection.<span class="reserved">prototype</span>.GetTables);
+
+<span class="comment">/**
+ * Checks if a specific table exists in the database
+ * <span class="attrib">@param</span> {String}  name The name of the table to check for
+ * <span class="attrib">@type</span> Boolean
+ */</span>
+DbConnection.<span class="reserved">prototype</span>.TableExists = <span class="reserved">function</span> DbConnection__TableExists (name) {
+	var tables = <span class="reserved">this</span>.GetTables();
+
+	<span class="reserved">for</span> (var i = 0; i &lt; tables.length; i++)
+		<span class="reserved">if</span> (tables[i].GetName().toLowerCase() == name.toLowerCase())
+			<span class="reserved">return</span>(true);
+
+	<span class="reserved">return</span>(false);
+}
+
+<span class="comment">/**
+ * Executes a statement without any result set
+ * <span class="attrib">@param</span> {String} sql The SQL statement to be executed
+ */</span>
+DbConnection.<span class="reserved">prototype</span>.ExecNoQuery = <span class="reserved">function</span> DbConnection__ExecNoQuery (sql) {
+	<span class="comment">//TODO: add support for parameterization of values (like prepared statements)</span>
+	<span class="reserved">return</span>(<span class="reserved">this</span>.__ExecNoQuery__(sql, false));
+}
+
+<span class="comment">/**
+ * Asynchronously executes a statement without any result set
+ * <span class="attrib">@param</span> {String} sql The SQL statement to be executed
+ */</span>
+DbConnection.<span class="reserved">prototype</span>.ExecNoQueryAsync = <span class="reserved">function</span> DbConnection__ExecNoQueryAsync (sql) {
+	<span class="reserved">return</span>(<span class="reserved">this</span>.__ExecNoQuery__(sql, true));
+}
+
+<span class="comment">/** <span class="attrib">@ignore</span> */</span>
+DbConnection.<span class="reserved">prototype</span>.__ExecNoQuery__ = <span class="reserved">function</span> DbConnection____ExecNoQuery__ (sql, async) {
+	<span class="reserved">if</span> (sql == null || sql == <span class="literal">''</span>)
+		throw <span class="literal">"SQL statement is null or empty"</span>;
+
+	<span class="comment">//TODO: see if this can return true/false</span>
+	var self = <span class="reserved">this</span>;
+	<span class="reserved">return</span>(ThreadJob.Call(
+		DbConnection.ExecThread,
+		!!async,
+		<span class="reserved">function</span> (sql) { <span class="reserved">return</span>(self._connection.executeSimpleSQL(sql)); },
+		[sql]
+		));
+}
+
+<span class="comment">/**
+ * Prepares a SQL statement for execution
+ * <span class="attrib">@param</span> {String} sql The SQL statement to be executed
+ * <span class="attrib">@type</span> DbQuery
+ */</span>
+DbConnection.<span class="reserved">prototype</span>.Prepare = <span class="reserved">function</span> DbConnection__Prepare (sql) {
+	<span class="reserved">if</span> (sql == null || sql == <span class="literal">''</span>)
+		throw <span class="literal">"SQL statement is null or empty"</span>;
+
+	<span class="reserved">return</span>(new DbQuery(<span class="reserved">this</span>._connection, sql));
+}
+</pre>
+	<hr>
+
+
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> <font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top"><em>
+<b>TripDub</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<font size="-1">
+
+</font>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Tue Nov 24 08:29:37 2009</div>
+</body>
+</html>

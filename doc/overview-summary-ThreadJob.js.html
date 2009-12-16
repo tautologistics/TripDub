@@ -1,0 +1,295 @@
+<!doctype html public "-//W3C//DTD HTML 4.0 Frameset//EN""http://www.w3.org/TR/REC-html40/frameset.dtd">
+<html>
+<head>
+<title>
+TripDub Overview
+</title>
+<link rel ="stylesheet" type="text/css" href="stylesheet.css" title="Style">
+<script>
+function asd() {
+	
+		parent.document.title="ThreadJob.js Overview";
+	
+}
+</script>
+</head>
+<body bgcolor="white" onload="asd();">
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> 	<font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top">
+<em>
+<b>TripDub</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<center>
+	
+	   <h2>ThreadJob.js</h2>
+	
+</center>
+
+	
+
+
+<h4>Summary</h4>
+<p>
+	
+		Contains the ThreadJob class, which provides a simple way to execute code on other threads
+ <BR/><BR/><B>Version: </B>0.8.0<BR/><BR/><B>Author:</B> ChrisWinberry
+ <BR/>
+	
+</p>
+
+<hr>
+
+
+    <table border="1" cellpadding="3" cellspacing="0" width="100%">
+    <tr bgcolor="#CCCCFF" class="TableHeadingColor">
+    <td colspan=2><font size="+2">
+    
+        <b>Class Summary</b>
+    
+    </font></td>
+    </tr>
+    
+    <tr bgcolor="white" class="TableRowColor">
+    <td width="15%"><b><a href="ThreadJob.html">ThreadJob</a></b></td>
+    <td>Provides a simple way to execute code on other threads (a)synchronously
+ </td>
+    </tr>
+    
+    </table>
+    <hr/> 
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<!-- ========== END METHOD SUMMARY =========== -->
+
+
+        <pre class="sourceview"><span class="comment">/**
+ * <span class="attrib">@fileoverview</span> Contains the ThreadJob class, which provides a simple way to execute code on other threads
+ * <span class="attrib">@author</span> ChrisWinberry
+ * <span class="attrib">@version</span> 0.8.0
+ */</span>
+
+<span class="comment">/**
+ * Creates a new ThreadJob instance; Do not use this, instead use the static method {<span class="attrib">@link</span> #Call}
+ * <span class="attrib">@constructor</span>
+ * <span class="attrib">@class</span> Provides a simple way to execute code on other threads (a)synchronously
+ * <span class="attrib">@param</span> {Function} func The function to execute
+ * <span class="attrib">@param</span> {Object[]} args An array of arguments to pass to the function
+ * <span class="attrib">@see</span> #Call
+ */</span>
+<span class="comment">//TODO: https://developer.mozilla.org/en/nsIPipe</span>
+<span class="reserved">function</span> ThreadJob (func, args) {
+	<span class="comment">/** <span class="attrib">@ignore</span> */</span>
+	<span class="reserved">this</span>._func = func;
+	<span class="comment">/** <span class="attrib">@ignore</span> */</span>
+	<span class="reserved">this</span>._args = args;
+	<span class="comment">/** <span class="attrib">@ignore</span> */</span>
+	<span class="reserved">this</span>._Result = null;
+	<span class="comment">/** <span class="attrib">@ignore</span> */</span>
+	<span class="reserved">this</span>._Exception = false;
+	<span class="comment">/** <span class="attrib">@ignore</span> */</span>
+	<span class="reserved">this</span>._Complete = false;
+}
+
+<span class="comment">/** <span class="attrib">@ignore</span> */</span>
+ThreadJob.CopyArgs = <span class="reserved">function</span> ThreadJob__CopyArgs (args) {
+	var newArgs = [];
+
+	<span class="reserved">for</span> (var i = 0; i &lt; args.length; i++)
+		newArgs.push(args[i]);
+
+	<span class="reserved">return</span>(newArgs);
+}
+
+<span class="comment">/**
+ * Calls the passed function on another thread (a)synchronously
+ * <span class="attrib">@param</span> {nsIThread} thread The thread to execute the code on
+ * <span class="attrib">@param</span> {Boolean} async A flag indicating whether to execute the function synchronously (False) or asynchronously (True)
+ * <span class="attrib">@param</span> {Function} func The function to execute
+ * <span class="attrib">@param</span> {Object} arg1_N Optional argument(s) to pass to the function being executed
+ * <span class="attrib">@type</span> Object
+ * <span class="attrib">@returns</span> When the function is called synchronously the return value of the called function is returned
+ */</span>
+ThreadJob.Call = <span class="reserved">function</span> ThreadJob__Call (thread, async, func <span class="comment">/*, n arguments */</span>) {
+	var args = ThreadJob.CopyArgs(arguments);
+	args.shift();
+	args.shift();
+	args.shift();
+	var job = new ThreadJob(func, args);
+	thread.dispatch(job, !!async ? thread.DISPATCH_NORMAL : thread.DISPATCH_SYNC);
+	<span class="reserved">return</span>(job.GetResult());
+}
+
+<span class="comment">/**
+ * Logs data to the console
+ * <span class="attrib">@param</span> {Object} data Data to be logged to the console
+ */</span>
+ThreadJob.<span class="reserved">prototype</span>.Log = <span class="reserved">function</span> ThreadJob__Log (data) { <span class="reserved">if</span> (typeof Log == <span class="literal">"function"</span>) { Log(data); } };
+
+<span class="comment">/**
+ * Gets the flag indicating whether the called function threw an exception. If there was an exception it will be stored in {<span class="attrib">@link</span> #Result}
+ * <span class="attrib">@type</span> Boolean 
+ */</span>
+ThreadJob.<span class="reserved">prototype</span>.GetException = <span class="reserved">function</span> ThreadJob__GetException () { <span class="reserved">return</span>(<span class="reserved">this</span>._Exception); }
+<span class="comment">/**
+ * Flag indicating whether the called function threw an exception. If there was an exception it will be stored in {<span class="attrib">@link</span> #Result}
+ * <span class="attrib">@type</span> Boolean 
+ */</span>
+ThreadJob.<span class="reserved">prototype</span>.__defineGetter__(<span class="literal">"Exception"</span>, ThreadJob.<span class="reserved">prototype</span>.GetException);
+
+<span class="comment">/**
+ * Gets the return value of the executed function
+ * <span class="attrib">@type</span> Object 
+ */</span>
+ThreadJob.<span class="reserved">prototype</span>.GetResult = <span class="reserved">function</span> ThreadJob__GetResult () {
+	<span class="reserved">if</span> (<span class="reserved">this</span>.GetException())
+		throw Utility.CopyException(<span class="reserved">this</span>._Result);
+	<span class="reserved">return</span>(<span class="reserved">this</span>._Result);
+}
+<span class="comment">/**
+ * The return value of the executed function
+ * <span class="attrib">@type</span> Object 
+ */</span>
+ThreadJob.<span class="reserved">prototype</span>.__defineGetter__(<span class="literal">"Result"</span>, ThreadJob.<span class="reserved">prototype</span>.GetResult);
+
+<span class="comment">/**
+ * Gets the flag indicating whether the called function has completed
+ * <span class="attrib">@type</span> Boolean 
+ */</span>
+ThreadJob.<span class="reserved">prototype</span>.GetComplete = <span class="reserved">function</span> ThreadJob__GetComplete () { <span class="reserved">return</span>(<span class="reserved">this</span>._Complete); }
+<span class="comment">/**
+ * Flag indicating whether the called function has completed
+ * <span class="attrib">@type</span> Boolean 
+ */</span>
+ThreadJob.<span class="reserved">prototype</span>.__defineGetter__(<span class="literal">"Complete"</span>, ThreadJob.<span class="reserved">prototype</span>.GetComplete);
+
+<span class="comment">/** <span class="attrib">@ignore</span> */</span>
+ThreadJob.<span class="reserved">prototype</span>.run = <span class="reserved">function</span> ThreadJob__run () {
+	try {
+		<span class="reserved">this</span>._Result = <span class="reserved">this</span>._func.apply(<span class="reserved">this</span>, <span class="reserved">this</span>._args);
+		<span class="reserved">this</span>._Complete = true;
+	} catch (err) {
+		<span class="reserved">this</span>.Log(<span class="literal">"ThreadJob.run Error: "</span> + err);
+		<span class="reserved">this</span>._Exception = true;
+		<span class="reserved">this</span>._Result = err;
+	}
+}
+
+<span class="comment">/** <span class="attrib">@ignore</span> */</span>
+ThreadJob.<span class="reserved">prototype</span>.QueryInterface = <span class="reserved">function</span> ThreadJob__QueryInterface (iid) {
+	<span class="reserved">if</span> (iid.equals(Components.interfaces.nsIRunnable) ||
+		iid.equals(Components.interfaces.nsISupports)) {
+		<span class="reserved">return</span>(<span class="reserved">this</span>);
+	}
+
+	throw Components.results.NS_ERROR_NO_INTERFACE;
+}
+</pre>
+	<hr>
+
+
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> <font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top"><em>
+<b>TripDub</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<font size="-1">
+
+</font>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Tue Nov 24 08:29:37 2009</div>
+</body>
+</html>

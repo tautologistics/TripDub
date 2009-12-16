@@ -1,0 +1,1 @@
+pref("tripdub.symbol", "BKS");

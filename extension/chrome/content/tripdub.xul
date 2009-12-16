@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE overlay SYSTEM "chrome://tripdub/locale/tripdub.dtd">
+
+<overlay id="tripdub-overlay"
+  xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+<script type="application/x-javascript"
+  src="chrome://tripdub/content/tripdub.js"/>
+
+<stringbundleset id="stringbundleset">
+  <stringbundle id="tripdub-string-bundle" src="chrome://tripdub/locale/tripdub.properties"/>
+</stringbundleset>
+
+<!-- Firefox -->
+<statusbar id="status-bar">
+  <statusbarpanel id="tripdub"
+    label="&panel_loading;"
+    context="tripdubmenu"
+    onclick="TripDub.refreshInformation()"
+  />
+</statusbar>
+
+<popupset>
+  <popup id="tripdubmenu" position="after_start">
+    <menuitem label="&menu_refresh_now.label;" oncommand="TripDub.refreshInformation()"/>
+    <menuseparator/>
+    <menuitem label="&menu_apple.label;" oncommand="TripDub.watchStock('AAPL')"/>
+    <menuitem label="&menu_google.label;" oncommand="TripDub.watchStock('GOOG')"/>
+    <menuitem label="&menu_microsoft.label;" oncommand="TripDub.watchStock('MSFT')"/>
+    <menuitem label="&menu_yahoo.label;" oncommand="TripDub.watchStock('YHOO')"/>
+  </popup>
+</popupset>
+
+</overlay>

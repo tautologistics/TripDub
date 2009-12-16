@@ -1,0 +1,6 @@
+<!ENTITY panel_loading "Loading...">
+<!ENTITY menu_refresh_now.label "Refresh Now">
+<!ENTITY menu_apple.label "Apple (AAPL)">
+<!ENTITY menu_google.label "Google (GOOG)">
+<!ENTITY menu_microsoft.label "Microsoft (MSFT)">
+<!ENTITY menu_yahoo.label "Yahoo (YHOO)">

@@ -1,0 +1,560 @@
+<!doctype html public "-//W3C//DTD HTML 4.0 Frameset//EN""http://www.w3.org/TR/REC-html40/frameset.dtd">
+<html>
+<head>
+<title>
+TripDub Overview
+</title>
+<link rel ="stylesheet" type="text/css" href="stylesheet.css" title="Style">
+<script>
+function asd() {
+	
+		parent.document.title="ConnectionHandler.js Overview";
+	
+}
+</script>
+</head>
+<body bgcolor="white" onload="asd();">
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> 	<font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top">
+<em>
+<b>TripDub</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<center>
+	
+	   <h2>ConnectionHandler.js</h2>
+	
+</center>
+
+	
+
+
+<h4>Summary</h4>
+<p>
+	
+		Contains the ConnectionHandler class
+ <BR/><BR/><B>Version: </B>0.8.0<BR/><BR/><B>Author:</B> ChrisWinberry
+ <BR/>
+	
+</p>
+
+<hr>
+
+
+    <table border="1" cellpadding="3" cellspacing="0" width="100%">
+    <tr bgcolor="#CCCCFF" class="TableHeadingColor">
+    <td colspan=2><font size="+2">
+    
+        <b>Class Summary</b>
+    
+    </font></td>
+    </tr>
+    
+    <tr bgcolor="white" class="TableRowColor">
+    <td width="15%"><b><a href="ConnectionHandler.html">ConnectionHandler</a></b></td>
+    <td>Handles incoming connections and their HTTP requests
+ </td>
+    </tr>
+    
+    </table>
+    <hr/> 
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<!-- ========== END METHOD SUMMARY =========== -->
+
+
+        <pre class="sourceview"><span class="comment">/**
+ * <span class="attrib">@fileoverview</span> Contains the ConnectionHandler class
+ * <span class="attrib">@author</span> ChrisWinberry
+ * <span class="attrib">@version</span> 0.8.0
+ */</span>
+
+<span class="comment">/**
+ * Creates a new ConnectionHandler
+ * <span class="attrib">@constructor</span>
+ * <span class="attrib">@class</span> Handles incoming connections and their HTTP requests
+ * <span class="attrib">@param</span> {HttpServer} server HttpServer instance that needs to listen on a socket
+ * <span class="attrib">@param</span> {nsIServerSocket} socket The socket the {<span class="attrib">@link</span> AsyncListener} is listening on
+ * <span class="attrib">@param</span> {nsISocketTransport} transport The connected socket transport
+ * <span class="attrib">@param</span> {nsIThread} parentThread The thread that the {<span class="attrib">@link</span> HttpServer}/{<span class="attrib">@link</span> AsyncListener} is running on
+ * <span class="attrib">@requires</span> HttpServer
+ */</span>
+<span class="reserved">function</span> ConnectionHandler (server, socket, transport, parentThread) {
+	<span class="comment">/** <span class="attrib">@ignore</span> */</span>
+	<span class="reserved">this</span>.server = server;
+	<span class="comment">/** <span class="attrib">@ignore</span> */</span>
+	<span class="reserved">this</span>.socket = socket;
+	<span class="comment">/** <span class="attrib">@ignore</span> */</span>
+	<span class="reserved">this</span>.transport = transport;
+	<span class="comment">/** <span class="attrib">@ignore</span> */</span>
+	<span class="reserved">this</span>.threaded = (parentThread != null);
+	<span class="comment">/** <span class="attrib">@ignore</span> */</span>
+	<span class="reserved">this</span>.request = new Request();
+	<span class="comment">/** <span class="attrib">@ignore</span> */</span>
+	<span class="reserved">this</span>.response = new Response(<span class="reserved">this</span>);
+
+	<span class="reserved">if</span> (<span class="reserved">this</span>.threaded) {
+		<span class="comment">/** <span class="attrib">@ignore</span> */</span>
+		<span class="reserved">this</span>.parentThread = parentThread;
+		<span class="comment">/** <span class="attrib">@ignore</span> */</span>
+		<span class="reserved">this</span>.thread = Components.classes[<span class="literal">"@mozilla.org/thread-manager;1"</span>]
+			.getService()
+			.newThread(0);
+		<span class="comment">//this.thread.priority = -2;</span>
+		<span class="reserved">this</span>.thread.dispatch(<span class="reserved">this</span>, <span class="reserved">this</span>.thread.DISPATCH_NORMAL);
+	}
+	<span class="reserved">else</span> {
+		<span class="comment">/** <span class="attrib">@ignore</span> */</span>
+		<span class="reserved">this</span>.parentThread = null;
+		<span class="comment">/** <span class="attrib">@ignore</span> */</span>
+		<span class="reserved">this</span>.thread = null;
+		<span class="reserved">this</span>.run();
+	}
+}
+
+<span class="comment">/**
+ * Thread used for synchronization of operation
+ * <span class="attrib">@type</span> nsIThread
+ */</span>
+ConnectionHandler.ExecThread = Components.classes[<span class="literal">"@mozilla.org/thread-manager;1"</span>].getService().newThread(0);
+
+<span class="comment">/**
+ * Creates a sandbox using the thread {<span class="attrib">@link</span> #ExecThread} to prevent multiple simultaneous creation
+ * <span class="attrib">@param</span> String uri The URI to use when creating the sandbox
+ * <span class="attrib">@type</span> nsIXPCComponents_utils_Sandbox
+ */</span>
+ConnectionHandler.CreateSandbox = <span class="reserved">function</span> ConnectionHandler__CreateSandbox (uri) {
+	<span class="reserved">return</span>(ThreadJob.Call(
+			ConnectionHandler.ExecThread,
+			false,
+			<span class="reserved">function</span> () { <span class="reserved">return</span>(new Components.utils.Sandbox(uri)); },
+			arguments
+			));
+}
+
+<span class="comment">/**
+ * Logs data to the console
+ * <span class="attrib">@param</span> {Object} data Data to be logged to the console
+ */</span>
+ConnectionHandler.<span class="reserved">prototype</span>.Log = <span class="reserved">function</span> ConnectionHandler__Log (data) { <span class="reserved">if</span> (typeof Log == <span class="literal">"function"</span>) { Log(data); } };
+
+<span class="comment">/**
+ * Writes the passed data to the connected HTTP client
+ * <span class="attrib">@param</span> {Object} data The data to write to the client
+ * <span class="attrib">@type</span> Boolean
+ * <span class="attrib">@returns</span> Indicates whether all the data was written
+ */</span>
+ConnectionHandler.<span class="reserved">prototype</span>.Write = <span class="reserved">function</span> ConnectionHandler__Write (data) {
+	var writeSize = 0;
+	try {
+		writeSize = <span class="reserved">this</span>.outStream.write(data, data.length);
+	} catch (ex) {
+		<span class="reserved">this</span>.log(<span class="literal">"ConnectionHandler::Write() Failed to write data\n"</span> + ex);
+		<span class="reserved">return</span>(false);
+	}
+
+	<span class="reserved">return</span>(data.length == writeSize);
+}
+
+<span class="comment">/* Interface: nsIRunnable */</span>
+<span class="comment">/** <span class="attrib">@ignore</span> */</span>
+ConnectionHandler.<span class="reserved">prototype</span>.run = <span class="reserved">function</span> ConnectionHandler__run () {
+	<span class="reserved">if</span> (<span class="reserved">this</span>.transport) {
+		<span class="reserved">this</span>.outStream = <span class="reserved">this</span>.transport.openOutputStream(1, 0, 0);
+
+		<span class="reserved">this</span>.stream = <span class="reserved">this</span>.transport.openInputStream(0, 0, 0);
+		<span class="reserved">this</span>.inStream = Components.classes[<span class="literal">"@mozilla.org/binaryinputstream;1"</span>]
+			.createInstance(Components.interfaces.nsIBinaryInputStream);
+		<span class="reserved">this</span>.inStream.setInputStream(<span class="reserved">this</span>.stream);
+
+		<span class="reserved">this</span>.dataPump = Components.classes[<span class="literal">"@mozilla.org/network/input-stream-pump;1"</span>]
+			.createInstance(Components.interfaces.nsIInputStreamPump);
+		<span class="reserved">this</span>.dataPump.init(<span class="reserved">this</span>.stream, -1, -1, 0, 0, false); <span class="comment">//closeWhenDone?</span>
+		<span class="reserved">this</span>.dataPump.asyncRead(<span class="reserved">this</span>, null);
+	}
+}
+
+<span class="comment">/** <span class="attrib">@ignore</span> */</span>
+ConnectionHandler.<span class="reserved">prototype</span>.__read__ = <span class="reserved">function</span> ConnectionHandler____read__ (filepath) {
+	<span class="reserved">if</span> ((typeof filepath == <span class="literal">"string"</span>) || (filepath instanceof String)) {
+		var oFile = Components.classes[<span class="literal">"@mozilla.org/file/local;1"</span>]
+			.createInstance(Components.interfaces.nsILocalFile);
+		<span class="comment">//oFile.initWithPath(filepath);</span>
+		oFile.initWithPath(<span class="reserved">this</span>.App.MapPath(<span class="reserved">this</span>.Request, filepath).GetSystemPath());
+		filepath = oFile;
+	}
+	<span class="reserved">if</span> (!(filepath instanceof Components.interfaces.nsILocalFile))
+		throw <span class="literal">"Parameter \"</span>filepath\<span class="literal">" is of an unexpected type ("</span> + (typeof filepath) + <span class="literal">")"</span>;
+
+	<span class="reserved">if</span> (!filepath.exists() || !filepath.isFile())
+		throw <span class="literal">"Unable to load file \"</span><span class="literal">" + filepath.path + "</span>\<span class="literal">""</span>;
+
+	var fileStream = Components.classes[<span class="literal">"@mozilla.org/network/file-input-stream;1"</span>].
+		createInstance(Components.interfaces.nsIFileInputStream);
+	fileStream.init(filepath, 1, 0, false);
+	var fileBinStream = Components.classes[<span class="literal">"@mozilla.org/binaryinputstream;1"</span>].
+		createInstance(Components.interfaces.nsIBinaryInputStream);
+	fileBinStream.setInputStream(fileStream);
+	var fileContents = fileBinStream.readBytes(filepath.fileSize);
+
+	filepath = null;
+	fileBinStream = null;
+	fileStream.close();
+	fileStream = null;
+
+	<span class="reserved">return</span>(fileContents);
+}
+
+<span class="comment">/** <span class="attrib">@ignore</span> */</span>
+ConnectionHandler.<span class="reserved">prototype</span>.__parsecode__ = <span class="reserved">function</span> ConnectionHandler____parsecode__ (code, writeFunc) {
+	<span class="reserved">if</span> (writeFunc == null || writeFunc == <span class="literal">''</span>)
+		writeFunc = <span class="literal">"Response.Write"</span>;
+
+	var codeParsed = new Array();
+
+	var codeParts = code.split(/&lt;\?js\s*/);
+	
+	<span class="reserved">if</span> (codeParts.length &lt;= 1) {
+		codeParsed.push(writeFunc + <span class="literal">"(\"</span><span class="literal">" + codeParts[0].replace(/\\/g, "</span>\\\\<span class="literal">").replace(/'/g, "</span>\\<span class="literal">'").replace(/"/g, '</span>\\<span class="literal">"').replace(/\r/g, '\\r').replace(/\n/g, '\\n').replace(/\t/g, '\\t') + "</span>\<span class="literal">");\n"</span>);
+	} <span class="reserved">else</span> {
+		<span class="reserved">for</span> (var i = 0; i &lt; codeParts.length; i++) {
+			<span class="reserved">if</span> (!codeParts[i].length) { continue; }
+
+			isCodeEnd = (i == 0 || i == codeParts.length);
+
+			codeSectionParts = codeParts[i].split(/\s*\?&gt;/);
+			<span class="reserved">if</span> (isCodeEnd &amp;&amp; codeSectionParts.length == 1) {
+				codeSectionParts.unshift(<span class="literal">""</span>);
+			}
+			<span class="comment">//if (codeSectionParts.length != 2) { throw(new ExScriptParseError('Unmatched code block markers near: "' + ((codeParts[i].length &gt; 128) ? (codeParts[i].substring(0, 128) + " ...") : codeParts[i]) + '"')); }</span>
+			<span class="reserved">if</span> (codeSectionParts.length != 2) { throw <span class="literal">'Unmatched code block markers near: "'</span> + ((codeParts[i].length &gt; 128) ? (codeParts[i].substring(0, 128) + <span class="literal">" ..."</span>) : codeParts[i]) + <span class="literal">'"'</span>; }
+
+			<span class="reserved">if</span> (codeSectionParts[0].length) {
+				<span class="reserved">if</span> (codeSectionParts[0].match(/^\s*\=/)) {
+					<span class="comment">//codeParsed += writeFunc + "(" + codeSectionParts[0].replace(/^\s*=\s*/, '').replace(/;+\s*$/, '') + ");\n";</span>
+					codeParsed[codeParsed.length] = writeFunc + <span class="literal">"("</span> +
+						codeSectionParts[0].replace(/^\s*=\s*/, <span class="literal">''</span>).replace(/;+\s*$/, <span class="literal">''</span>).replace(/Response.End\s*\(\s*\)/g, <span class="literal">'Response.End(); throw(new ExResponseEnd());'</span>) +
+						<span class="literal">");\n"</span>;
+				} <span class="reserved">else</span> {
+					<span class="comment">//codeParsed += codeSectionParts[0] + "\n";</span>
+					codeParsed[codeParsed.length] = codeSectionParts[0].replace(/Response.End\s*\(\s*\)/g, <span class="literal">'Response.End(); throw(new ExResponseEnd());'</span>) + <span class="literal">"\n"</span>;
+				}
+			}
+
+			<span class="reserved">if</span> (codeSectionParts[1].length) {
+				<span class="comment">//TODO: find better replace/translate method</span>
+				<span class="comment">//codeParsed += "response.write(\"" + codeSectionParts[1].replace(/\\/g, "\\\\").replace(/'/g, "\\'").replace(/"/g, '\\"').replace(/\r/g, '\\r').replace(/\n/g, '\\n').replace(/\t/g, '\\t') + "\");\n";</span>
+				codeParsed[codeParsed.length] = writeFunc + <span class="literal">"(\"</span><span class="literal">" + codeSectionParts[1].replace(/\\/g, "</span>\\\\<span class="literal">").replace(/'/g, "</span>\\<span class="literal">'").replace(/"/g, '</span>\\<span class="literal">"').replace(/\r/g, '\\r').replace(/\n/g, '\\n').replace(/\t/g, '\\t') + "</span>\<span class="literal">");\n"</span>;
+			}
+		}
+	}
+
+	<span class="reserved">return</span>(codeParsed.join(<span class="literal">''</span>));
+}
+
+<span class="comment">/** <span class="attrib">@ignore</span> */</span>
+ConnectionHandler.<span class="reserved">prototype</span>.__loadcode__ = <span class="reserved">function</span> ConnectionHandler____loadcode__ (filepath, rawJs) {
+	rawJs = !!rawJs;
+	<span class="reserved">if</span> (rawJs)
+		<span class="reserved">return</span>(<span class="reserved">this</span>.read(filepath));
+	<span class="reserved">else</span>
+		<span class="reserved">return</span>(<span class="reserved">this</span>.parsecode(<span class="reserved">this</span>.read(filepath)));
+}
+
+<span class="comment">/** <span class="attrib">@ignore</span> */</span>
+<span class="comment">//TODO: Use optional arguments for evalInSandbox()?</span>
+<span class="comment">/*
+ * https://developer.mozilla.org/En/Components.utils.evalInSandbox
+ * As of Firefox 3.5/Gecko 1.9.1, it's possible to optionally specify the JS version, filename, and line number of the code being evaluated. For instance:
+ * 		var x = Components.utils.evalInSandbox("let x = 1;", sandbox, "1.8", "http://foo.com/mycode.js", 25);
+ * The above will execute code using JavaScript 1.8.  Any exceptions raised by the evaluated code will show as originating from the above URL.  The evaluated code is assumed to start at line 25 of the document at that URL.
+ */</span>
+ConnectionHandler.<span class="reserved">prototype</span>.__require__ = <span class="reserved">function</span> ConnectionHandler____require__ (filepath, rawJs) {
+	rawJs = !!rawJs;
+	Components.utils.evalInSandbox(
+		<span class="reserved">this</span>.loadcode(filepath, rawJs),
+		<span class="reserved">this</span>);
+}
+
+<span class="comment">/** <span class="attrib">@ignore</span> */</span>
+<span class="comment">//TODO: Use optional arguments for evalInSandbox()?</span>
+<span class="comment">/*
+ * https://developer.mozilla.org/En/Components.utils.evalInSandbox
+ * As of Firefox 3.5/Gecko 1.9.1, it's possible to optionally specify the JS version, filename, and line number of the code being evaluated. For instance:
+ * 		var x = Components.utils.evalInSandbox("let x = 1;", sandbox, "1.8", "http://foo.com/mycode.js", 25);
+ * The above will execute code using JavaScript 1.8.  Any exceptions raised by the evaluated code will show as originating from the above URL.  The evaluated code is assumed to start at line 25 of the document at that URL.
+ */</span>
+ConnectionHandler.<span class="reserved">prototype</span>.__include__ = <span class="reserved">function</span> ConnectionHandler____include__ (filepath, rawJs) {
+	rawJs = !!rawJs;
+	var code = <span class="literal">""</span>;
+	try {
+		code = <span class="reserved">this</span>.loadcode(filepath, rawJs);
+	} catch (ex) { }
+	Components.utils.evalInSandbox(
+		code,
+		<span class="reserved">this</span>);
+}
+
+<span class="comment">/** <span class="attrib">@ignore</span> */</span>
+ConnectionHandler.<span class="reserved">prototype</span>.HandleRequest = <span class="reserved">function</span> ConnectionHandler__HandleRequest () {
+	<span class="comment">//this.Log("[" + this.request.GetMethod() + "] " + this.request.GetPath() + ((this.request.GetQuerystring() == '') ? '' : '?' + this.request.GetQuerystring()));</span>
+	<span class="comment">/*
+	//CREATE  TABLE  IF NOT EXISTS "main"."access_log" ("module" VARCHAR NOT NULL , "timestamp" DATETIME NOT NULL  DEFAULT CURRENT_TIMESTAMP, "remote-addr" VARCHAR NOT NULL , "port" NUMERIC NOT NULL  DEFAULT 80, "method" VARCHAR NOT NULL , "path" VARCHAR, "query" VARCHAR, "sent" NUMERIC NOT NULL  DEFAULT 0, "recvd" NUMERIC NOT NULL  DEFAULT 0, "time-taken" NUMERIC NOT NULL  DEFAULT 0, "version" NUMERIC NOT NULL  DEFAULT 1, "agent" VARCHAR, "referrer" VARCHAR, "status" NUMERIC NOT NULL  DEFAULT 0)
+	var db = new DbConnection("system");
+	if (!db.TableExists("access_log"))
+		db.ExecNoQuery(
+			"CREATE TABLE 'access_log' ( " +
+				"id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
+				"access_time TIMESTAMP NOT NULL, " +
+				"path VARCHAR NOT NULL, " +
+				"query VARCHAR " +
+				");"
+			);
+	var query = db.Prepare("INSERT INTO access_log (path, query) VALUES ('?', '?')");
+	query.ExecAsync(this.request.GetPath(), this.request.GetQuerystring());
+	query.Free();
+	db.Close();
+	*/</span>
+	
+	<span class="comment">//TODO: fix NS_ERROR_OUT_OF_MEMORY problem with evalInSandbox() calls</span>
+	<span class="comment">//TODO: Use nsIDOMWindow or nsIPrincipal instead of URI?</span>
+	<span class="comment">//https://developer.mozilla.org/en/Components.utils.evalInSandbox</span>
+	<span class="comment">//http://www.oxymoronical.com/experiments/apidocs/platform/1.9.2a1pre/interface/nsIPrincipal</span>
+	<span class="comment">/* [ConnectionHandler.HandleRequest(0)] ERROR Sending Error Page:
+	 * 	[Exception... "Component returned failure code: 0x8007000e (NS_ERROR_OUT_OF_MEMORY) [nsIXPCComponents_Utils.evalInSandbox]"
+	 * 	nsresult: "0x8007000e (NS_ERROR_OUT_OF_MEMORY)"
+	 * 	location: "JS frame :: chrome://myapp/content/lib/ConnectionHandler.js :: ConnectionHandler__sandBox____start__ :: line 256"
+	 * 	data: no]
+	 */</span>
+	<span class="comment">//var sandBox = new Components.utils.Sandbox("http://localhost:" + this.server.port + this.request.Url);</span>
+	<span class="comment">//var sandBox = new Components.utils.Sandbox("http://localhost/");</span>
+	var sandBox = ConnectionHandler.CreateSandbox(<span class="literal">"http://localhost/"</span>);
+	try {
+		var module = new Module(<span class="literal">"tripdub@chris.winberry.net"</span>);
+		sandBox.App = module.App;
+		sandBox.Request = <span class="reserved">this</span>.request;
+		sandBox.Response = <span class="reserved">this</span>.response;
+		sandBox.log = <span class="reserved">this</span>.Log;
+		sandBox.read = <span class="reserved">this</span>.__read__;
+		sandBox.parsecode = <span class="reserved">this</span>.__parsecode__;
+		sandBox.loadcode = <span class="reserved">this</span>.__loadcode__;
+		sandBox.require = <span class="reserved">this</span>.__require__;
+		sandBox.include = <span class="reserved">this</span>.__include__;
+		<span class="comment">//TODO: load these into module members</span>
+		sandBox.__sandboxer__ = sandBox.read((new module.HandlerVirtualPath(<span class="literal">"SandBoxer.js"</span>)).GetLocalFile());
+		sandBox.__scripthandler__ = sandBox.read((new module.HandlerVirtualPath(<span class="literal">"ScriptHandler.js"</span>)).GetLocalFile());
+
+		sandBox.__start__ = <span class="reserved">function</span> ConnectionHandler__sandBox____start__ () {
+			var __sandboxer__ = <span class="reserved">this</span>.__sandboxer__;
+			var __scripthandler__ = <span class="reserved">this</span>.__scripthandler__;
+			delete <span class="reserved">this</span>[<span class="literal">'__start__'</span>];
+			delete <span class="reserved">this</span>[<span class="literal">'__sandboxer__'</span>];
+			delete <span class="reserved">this</span>[<span class="literal">'__scripthandler__'</span>];
+			Components.utils.evalInSandbox(
+				__sandboxer__,
+				<span class="reserved">this</span>);
+			Components.utils.evalInSandbox(
+				__scripthandler__,
+				<span class="reserved">this</span>);
+		}
+		Components.utils.evalInSandbox(
+			<span class="literal">"__start__();"</span>,
+			sandBox);
+
+		<span class="reserved">this</span>.response.End();
+	} catch (ex) {
+		<span class="reserved">if</span> (ex instanceof ExResponseEnd) {
+			<span class="comment">//this.Log("Response.End() called");</span>
+		}
+		<span class="reserved">else</span> {
+			<span class="comment">//TODO: Temp/Debug</span>
+			<span class="reserved">for</span> (var key in ex) {
+				<span class="reserved">this</span>.Log(<span class="literal">"DEB: "</span>  + key + <span class="literal">" ="</span> + ex[key]);
+			}
+			<span class="reserved">this</span>.Log(<span class="literal">"NS_ERROR_OUT_OF_MEMORY: "</span> + ex.toString().indexOf(<span class="literal">"NS_ERROR_OUT_OF_MEMORY"</span>));
+			<span class="reserved">this</span>.Log(<span class="literal">"nsIXPCComponents_Utils.evalInSandbox: "</span> + ex.toString().indexOf(<span class="literal">"nsIXPCComponents_Utils.evalInSandbox"</span>));
+			
+			<span class="reserved">this</span>.Log(<span class="literal">"ERROR: "</span> + ex);
+			<span class="reserved">if</span> (ex[<span class="literal">"QueryInterface"</span>] != null)
+				ex = {
+					message: ex.message,
+					fileName: ex.filename,
+					lineNumber: ex.lineNumber,
+					stack: <span class="literal">""</span>,
+					name: ex.name,
+					toString: <span class="reserved">function</span> () { <span class="reserved">return</span>(<span class="reserved">this</span>.name + <span class="literal">": "</span> + <span class="reserved">this</span>.message); }
+					};
+			try {
+				sandBox.PageException = ex;
+				sandBox.__errorhandler__ = sandBox.read((new module.HandlerVirtualPath(<span class="literal">"ErrorHandler.js"</span>)).GetLocalFile());
+				sandBox.__start__ = <span class="reserved">function</span> ConnectionHandler__sandBox____start__ () {
+					var __errorhandler__ = <span class="reserved">this</span>.__errorhandler__;
+					delete <span class="reserved">this</span>[<span class="literal">'__start__'</span>];
+					delete <span class="reserved">this</span>[<span class="literal">'__errorhandler__'</span>];
+					Components.utils.evalInSandbox(
+						__errorhandler__,
+						<span class="reserved">this</span>);
+				}
+				Components.utils.evalInSandbox(
+					<span class="literal">"__start__();"</span>,
+					sandBox);
+
+				<span class="reserved">this</span>.response.End();
+			} catch (ex2) {
+				<span class="reserved">if</span> (!(ex2 instanceof ExResponseEnd)) {
+					<span class="reserved">this</span>.Log(<span class="literal">"ERROR Sending Error Page: "</span> + ex2);
+				}
+			}
+		}
+	}
+}
+
+<span class="comment">/** <span class="attrib">@ignore</span> */</span>
+ConnectionHandler.<span class="reserved">prototype</span>.QueryInterface = <span class="reserved">function</span> ConnectionHandler__QueryInterface (aIID) {
+	<span class="reserved">if</span> (
+		!aIID.equals(Components.interfaces.nsIStreamListener)
+		&amp;&amp;
+		!aIID.equals(Components.interfaces.nsISupports)
+		&amp;&amp;
+		!aIID.equals(Components.interfaces.nsIRunnable)
+		)
+		throw(Components.results.NS_ERROR_NO_INTERFACE);
+
+	<span class="reserved">return</span>(<span class="reserved">this</span>);
+}
+
+<span class="comment">/* Interface: nsIStreamListener */</span>
+<span class="comment">/** <span class="attrib">@ignore</span> */</span>
+ConnectionHandler.<span class="reserved">prototype</span>.onStartRequest = <span class="reserved">function</span> ConnectionHandler__onStartRequest (request, context) {
+	<span class="comment">//this.Log("ConnectionHandler__onStartRequest");</span>
+}
+
+<span class="comment">/** <span class="attrib">@ignore</span> */</span>
+ConnectionHandler.<span class="reserved">prototype</span>.onStopRequest = <span class="reserved">function</span> ConnectionHandler__onStopRequest (request, context, status) {
+	<span class="comment">//this.Log("ConnectionHandler__onStopRequest");</span>
+	<span class="reserved">if</span> (<span class="reserved">this</span>.threaded)
+		new ThreadSuicide(<span class="reserved">this</span>.parentThread);
+}
+
+<span class="comment">/** <span class="attrib">@ignore</span> */</span>
+ConnectionHandler.<span class="reserved">prototype</span>.onDataAvailable = <span class="reserved">function</span> ConnectionHandler__onDataAvailable (request, context, inputStream, offset, count) {
+	try {
+		var data = <span class="reserved">this</span>.inStream.readBytes(<span class="reserved">this</span>.inStream.available());
+		<span class="reserved">if</span> (<span class="reserved">this</span>.request.ParseChunk(data)) {
+			<span class="reserved">this</span>.HandleRequest();
+			<span class="reserved">this</span>.inStream.close();
+			<span class="reserved">this</span>.outStream.close();
+		}
+		<span class="comment">//TODO: Handle timeouts</span>
+		<span class="comment">//TODO: Handle large bodies</span>
+	} catch (ex) { <span class="reserved">this</span>.Log(ex); }
+}
+</pre>
+	<hr>
+
+
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> <font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top"><em>
+<b>TripDub</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<font size="-1">
+
+</font>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Tue Nov 24 08:29:37 2009</div>
+</body>
+</html>
